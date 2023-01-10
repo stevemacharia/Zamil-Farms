@@ -1,0 +1,31 @@
+.bg-main{
+    background-color: #f5faf0 !important;
+}
+.bg-secondary{
+    background-color: #cbe3be !important;
+}
+.f-color-secondary{
+    color: #50a236 !important;
+}
+
+  #slider{
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/zamil_farms_slider_two.jpg");
+      background-size: cover;
+      width: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+  }
+  #OurStoryImage{
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/zamil_farms__about_us.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+  }
+  #CutOffGoat{
+      background: url("/static/main/images/zamil_farm_goat.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+  }
