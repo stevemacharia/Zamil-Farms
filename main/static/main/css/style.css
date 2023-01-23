@@ -4,8 +4,14 @@
 .bg-secondary{
     background-color: #cbe3be !important;
 }
+.bg-tertiary{
+    background-color:#152605 !important;
+}
 .f-color-secondary{
     color: #50a236 !important;
+}
+.f-color-primary{
+    color:#152605 !important;
 }
 
   #slider{
@@ -29,3 +35,6 @@
       background-position: center;
       background-repeat: no-repeat;
   }
+
+
+
