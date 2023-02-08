@@ -1,18 +1,29 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm
-from django.contrib.auth import login, authenticate #add this
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth.forms import AuthenticationForm  # add this
+from verify_email.email_handler import send_verification_email
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from user.models import UserProfile
+from .forms import UserUpdateForm, ProfileUpdateForm
+
 
 def register_request(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            inactive_user = send_verification_email(request, form)
             user = form.save()
+            userprofile = form.save(commit=False)
+            # assign user to your profile
+            userprofile.user = user
+            userprofile.save()
             login(request, user)
-            messages.success(request, "Registration successful.")
-            return redirect("main:index")
-        messages.error(request, "Unsuccessful registration. Invalid information.")
+            messages.success(request, f'An email verification has sent! Check your email')
+            return redirect('login_prompt')
+        messages.warning(request, "Unsuccessful registration. Invalid information.")
     form = UserRegisterForm()
     return render(request=request, template_name="user/register.html", context={"register_form": form})
 
@@ -26,11 +37,48 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect("index")
+                messages.success(request, f"You are now logged in as {username}.")
+                return redirect("profile")
             else:
-                messages.error(request,"Invalid username or password.")
+                messages.warning(request, "Invalid username or password1.")
         else:
-            messages.error(request,"Invalid username or password.")
+            messages.warning(request, "Invalid username or password 2.")
     form = AuthenticationForm()
-    return render(request=request, template_name="user/login.html", context={"login_form":form})
+    return render(request=request, template_name="user/login.html", context={"login_form": form})
+
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect("index")
+
+
+def login_prompt(request):
+    return render(request, 'user/login_prompt.html')
+
+
+@login_required
+def profile(request):
+    user = request.user
+    global userinfo
+    userinfo = user
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+        else:
+            messages.warning(request, f'Failed to update your details, Kindly retry again. ')
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(request.FILES, instance=request.user.userprofile)
+        context = {
+            'user': request.user,
+            'u_form': u_form,
+            'p_form': p_form,
+        }
+    return render(request, 'user/profile.html', context)

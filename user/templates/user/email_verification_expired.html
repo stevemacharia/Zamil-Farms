@@ -1,0 +1,18 @@
+
+{% load crispy_forms_tags %}
+{% include 'user/user_base.html' %}
+<div class="container py-5 my-5 bg-main rounded">
+    <h1 class="display-5 fw-bolder f-color-primary text-center">Zamil Farms</h1>
+    <p class="text-dark text-center">Earn more with less effort thanks to Zamil Farms' cost-effective goat breeds</p>
+    <div class="alert alert-danger" role="alert">
+        <div class="text-center">
+        Email verification link has expired request another one!
+        </div>
+    </div>
+    <div class="cart_buttons d-flex justify-content-between">
+        <a href="{% url 'request-new-link-from-email'%}"><button type="button" class="btn btn-outline-dark">Resend Verification Email</button></a>
+        <a href="{% url 'login'%}"><button type="button" class="btn btn-success rounded-0 border-0" > Proceed to Login
+        <div class="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"> </div>
+        </button></a>
+    </div>
+</div>

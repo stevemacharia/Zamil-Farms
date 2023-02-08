@@ -1,0 +1,26 @@
+{% extends 'password_reset/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+    {% endif %}
+    <h1 class="display-5 text-center fw-bolder f-color-primary">Zamil Farms</h1>
+    <div class="row align-items-center mt-5" id="AuthRow">
+        <div class="col-sm-6 px-5">
+            <img src="/static/main/images/zamil_farms_forgot_password.svg" class="w-100" />
+        </div>
+        <div class="col-sm-6 px-5 border-start">
+            <h2 class="fw-bold f-color-primary">Forgot Your Password</h2>
+            <p class="fw-normal text-dark">Enter the email or username used when registering</p>
+            <form method="post" action="{{ url }}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-dark bg-tertiary mt-3" type="submit">Recover my password</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'password_reset/base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block content %}
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+    {% endif %}
+    <h1 class="display-5 text-center fw-bolder f-color-primary">Zamil Farms</h1>
+    <div class="row align-items-center mt-5" id="AuthRow">
+        <div class="col-sm-6 px-5">
+            <img src="/static/main/images/zamil_farms_forgot_password.svg" class="w-100" />
+        </div>
+        <div class="col-sm-6 px-5 border-start">
+            <h3 class="f-color-primary fw-bold">Password Recovery</h3>
+            <p class="text-dark">Your password has successfully been reset. You can use it right now on the login page.</p>
+            <a href="{% url 'login' %}" class="text-reset f-color-primary"><h6 class="f-color-primary fw-bold">Go to Login page</h6></a>
+        </div>
+    </div>
+
+
+{% endblock content %}

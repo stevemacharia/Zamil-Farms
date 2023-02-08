@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'password_reset',
+    "verify_email.apps.VerifyEmailConfig",
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'Bit/2015/29070',
+        'PASSWORD': 'toor',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -128,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static')]
 
@@ -142,3 +144,41 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# email config
+DEFAULT_FROM_EMAIL = 'info@arieshelby.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.arieshelby.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'info@arieshelby.com'
+EMAIL_HOST_PASSWORD = 'c0d3bl00d3d'
+
+LOGIN_REDIRECT_URL = 'profile'
+# end of email config
+
+# start of email verification process
+REQUEST_NEW_EMAIL_TEMPLATE = 'user/email_verification.html'
+
+# HTML_MESSAGE_TEMPLATE = "path/to/html_template.html"
+
+VERIFICATION_SUCCESS_TEMPLATE = "user/email_verification_success.html"
+
+VERIFICATION_FAILED_TEMPLATE = "user/email_verification_failed.html"
+
+LINK_EXPIRED_TEMPLATE = 'user/email_verification_expired.html'
+
+NEW_EMAIL_SENT_TEMPLATE = 'user/new_email_sent.html'
+
+EXPIRE_AFTER = "30m"
+
+LOGIN_URL = 'login'
+
+MAX_RETRIES = 10
+# NEW_EMAIL_SENT_TEMPLATE  = 'path/to/new_email_sent.html'
+# end of email verification process
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

@@ -1,13 +1,36 @@
 {% include 'user/user_base.html' %}
 {% load crispy_forms_tags %}
 
+
 <!--Login-->
-<div class="container py-5">
-  <h1>Login</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ login_form|crispy }}
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
-  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+<div class="container py-5 ">
+    <div class="row align-items-center mt-5 shadow-sm bg-main rounded p-5" id="AuthRow">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+       {% endif %}
+
+        <div class="col-sm-6 px-5">
+            <h5 class="">Welome back to</h5>
+            <h1 class="display-5 fw-bolder f-color-primary">Zamil Farms</h1>
+            <p class="text-dark">Earn more with less effort thanks to Zamil Farms' cost-effective goat breeds</p>
+        </div>
+        <div class="col-sm-6 px-5 border-start">
+          <h3 class="fw-bold">Login</h3>
+          <form method="POST">
+            {% csrf_token %}
+            {{ login_form|crispy }}
+            <button class="btn btn-dark bg-tertiary mt-3" type="submit">Login</button>
+          </form>
+          <p class="text-left pt-2">Don't have an account? <a href="{% url 'register' %}" class="f-color-primary">Create an account</a>.</p>
+
+            <small class="text-muted">
+                {# Assumes you setup the password_reset view in your URLconf #}
+                <p class="pt-3"><a class="fw-bold text-dark" href="{% url "password_reset_recover" %}">Forgot your password?</a></p>
+            </small>
+        </div>
+    </div>
 </div>

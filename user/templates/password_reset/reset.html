@@ -1,0 +1,37 @@
+{% extends 'password_reset/base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block content %}
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{message}}
+                </div>
+            {% endfor %}
+    {% endif %}
+    <h1 class="display-5 text-center fw-bolder f-color-primary">Zamil Farms</h1>
+    <div class="row align-items-center mt-5" id="AuthRow">
+        <div class="col-sm-6 px-5">
+            <img src="/static/main/images/zamil_farms_forgot_password.svg" class="w-100" />
+        </div>
+        <div class="col-sm-6 px-5 border-start">
+            <h3 class="f-color-primary fw-bold">Password Recovery</h3>
+
+
+            {% if invalid %}{% url "password_reset_recover" as recovery_url %}
+                <p>{% blocktrans %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.{% endblocktrans %}</p>
+            {% else %}
+                <p>{% blocktrans %}Hi, <strong>{{ username }}</strong>. Please choose your new password.{% endblocktrans %}</p>
+                <form method="post" action="{% url "password_reset_reset" token %}">
+                    {% csrf_token %}
+                    {{ form|crispy  }}
+                    <button class="btn btn-dark bg-tertiary mt-3" type="submit">Set new Password</button>
+                </form>
+            {% endif %}
+
+            <a href="{% url 'index' %}" class="text-reset f-color-primary"><h6 class="f-color-primary fw-bold pt-3">Go back to Homepage</h6></a>
+        </div>
+    </div>
+
+
+{% endblock content %}

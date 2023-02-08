@@ -1,0 +1,25 @@
+
+{% load crispy_forms_tags %}
+{% include 'user/user_base.html' %}
+<div class="container py-5 my-5 shadow-sm bg-main rounded">
+    <h1 class="display-5 fw-bolder f-color-primary text-center">Zamil Farm</h1>
+    <p class="text-dark text-center">Earn more with less effort thanks to Zamil Farms cost-effective goat breeds</p>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <h5 class="card-header text-dark fw-bold">Send Verification Email</h5>
+              <div class="card-body">
+                <form method='POST' >
+                        {% csrf_token %}
+                        <fieldset>
+                            {{form |crispy }}
+                        </fieldset>
+                        <div>
+                            <button class="btn btn-dark bg-tertiary mt-3" type="submit">Request New Verification Email</button>
+                        </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

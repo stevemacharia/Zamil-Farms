@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ZAMIL FARMS</title>
+        <title>ZAMIL FARM</title>
 
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icon/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icon/favicon-32x32.png' %}">
@@ -28,7 +28,7 @@
       <nav class="navbar py-4 sticky-top navbar-expand-lg navbar-light bg-white shadow-sm navbar-mod bg-main">
          <div class="container mt-1">
             <a class="navbar-brand fw-bold fs-5 px-2 py-1" href="{% url 'index' %}"  data-bs-toggle="tooltip"
-               data-bs-placement="bottom" title="Access admin panel"> ZAMIL FARMS
+               data-bs-placement="bottom" title="Access admin panel"> ZAMIL FARM
                 </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
@@ -53,13 +53,8 @@
                    <li class="nav-item">
                      <a class="nav-link active fw-bold" href="#"
                         data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        title="Coming soon">Shop</a>
+                        title="Shop">Shop</a>
                   </li>
-                   <li class="nav-item">
-                     <a class="nav-link active fw-bold" href="#"
-                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        title="Coming soon">Accounts</a>
-                   </li>
 
 
                </ul>
@@ -67,15 +62,25 @@
                    <li class="nav-item">
                      <a class="nav-link active fw-bold" href="#" data-bs-toggle="tooltip"
                         data-bs-placement="bottom" title="Cart">
-                         <h3><i class="bi bi-bag-check-fill"></i></h3>
+                         <h4 class="mb-0"><i class="bi bi-bag-check-fill"></i></h4>
                      </a>
                    </li>
-{#                    <li class="nav-item">#}
-{#                         <a class="nav-link active fw-bold" href="#" data-bs-toggle="tooltip"#}
-{#                            data-bs-placement="bottom" title="Profile">#}
-{#                             <h3><i class="bi bi-people-fill"></i></h3>#}
-{#                         </a>#}
-{#                    </li>#}
+                    {% if user.is_authenticated %}
+                      <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" data-bs-placement="bottom"  href="{% url 'logout' %}">Logout</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link fw-bold text-dark" href="{% url 'profile' %}">{{user.username}}</a>
+                      </li>
+                      {% else %}
+
+                      <li class="nav-item">
+                         <a class="nav-link active fw-bold" href="{% url 'login' %}" data-bs-toggle="tooltip"
+                            data-bs-placement="bottom" title="Profile">
+                             <h3><i class="bi bi-people-fill"></i></h3>
+                         </a>
+                      </li>
+                    {% endif %}
                 </ul>
 
             </div>

@@ -1,0 +1,34 @@
+{% include 'main/base.html' %}
+
+    <div class="container my-5">
+
+        <div class="card details-card p-0">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <img class="img-fluid details-img" src="{{ product.main_image.url}}" alt="">
+                </div>
+                <div class="col-md-6 col-sm-12 description-container p-5">
+                    <div class="main-description">
+                        <p class="product-category mb-0">Graphite</p>
+                        <h3>{{ product.product_name}}</h3>
+                        <hr>
+                        <p class="product-price fw-bold">Kes: {{ product.price }}</p>
+                        <div class="d-grid gap-2">
+                            <button name="add_to_cart" type="submit" class="btn btn-dark bg-tertiary">Add to cart</button>
+                        </div>
+                        <p class="py-3">Have a question about our products at E-Store? Feel free to contact our representatives via live chat or email.</p>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <hr>
+                    <div class="px-5">
+                        <h4 class="product-title f-color-primary text-center mt-4 mb-1">About this product</h4>
+                        <p class="product-description mb-4">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis assumenda voluptatem tempore dolor quod. Expedita, id, minus similique dolor sed adipisci aliquam natus amet doloremque delectus cupiditate? Sint, quasi, ad necessitatibus omnis quaerat tenetur corporis porro aut, natus ex ab id vel odit veniam fugiat temporibus aperiam quia rem minima!
+                        </p>
+                    </div>
+                    <hr>
+                </div>
+            </div><!-- End row -->
+        </div>
+    </div>

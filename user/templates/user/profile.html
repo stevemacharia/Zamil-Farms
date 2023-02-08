@@ -1,0 +1,128 @@
+{% include 'main/base.html' %}
+{% load crispy_forms_tags %}
+<section class="py-2 header">
+    <div class="container py-2">
+        <header class="text-start mb-1 pb-1 text-dark">
+            <h1 class="text-capitalize">{{user.username}}'s Profile</h1>
+        </header>
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Tabs nav -->
+                <div class="nav flex-column nav-pills nav-pills-custom text-dark" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link mb-3 p-3 shadow active f-color-primary" id="v-pills-home-tab" data-bs-toggle="pill"  href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <i class="bi bi-people-fill"></i>
+                        <span class="font-weight-bold small text-uppercase ps-1 ">My Profile</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow f-color-primary" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        <i class="bi bi-clock-history"></i>
+                        <span class="font-weight-bold small text-uppercase ps-1">Order History</span></a>
+
+                    <a class="nav-link mb-3 p-3 shadow f-color-primary"  href="{% url 'logout'%}" >
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span class="font-weight-bold small text-uppercase ps-1">Log out</span></a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Tabs content -->
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade shadow bg-main rounded show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="card border-0 mb-3 bg-main" style="max-width: 540px;">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+
+                              <img src="{{user.userprofile.profile_pic.url}}" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h4 class="card-title text-capitalize">{{user.username}}</h4>
+                                  <p class="text-muted"> Joined on: {{user.date_joined}} </p>
+                                  <p class="card-text ps-1 mb-1 fst-italic fw-light  "><i class="bi bi-envelope-fill"></i> {{user.email}}</p>
+                                  <p class="card-text fw-light ps-1 fst-italic"><i class="bi bi-phone-fill"></i> {{user.userprofile.phone_number}}</p>
+                                  <button type="button" class="btn btn-outline-dark m-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Update details</button>
+                                  <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <span class="modal-title" id="exampleModalLabel">
+                                                <h5 class="f-color-primary fw-bold">Update Your Details</h5>
+                                                <p class="card-text"><small class="text-muted">*Kindly fill the phone number with no spaces i.e 0712345678</small></p>
+                                            </span>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <form method="POST" enctype="multipart/form-data">
+                                              <div class="modal-body">
+                                                  <fieldset class="form-group">
+                                                      <div class="">
+                                                        {% csrf_token %}
+                                                        {{ u_form|crispy }}
+                                                        {{ p_form|crispy }}
+                                                      </div>
+                                                  </fieldset>
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <div class="form-group">
+                                                      <button class="btn btn-outline-dark" type="submit">Update </button>
+                                                  </div>
+                                              </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <!-- End of Modal -->
+                                  <a href="#"><button type="button" class="btn btn-outline-danger m-1">Change Password</button></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane fade shadow rounded  p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        {% if orders %}
+                            <h4 class="font-italic mb-4">Orders</h4>
+                                <table class="table table-responsive">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Order Ref</th>
+                                      <th scope="col">Date Ordered</th>
+                                      <th scope="col">Price</th>
+                                      <th scope="col">View</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="table-group-divider">
+                                  {% for order in orders%}
+                                    <tr>
+                                      <th scope="row">1</th>
+                                      <td>#{{order.order_name_id}}</td>
+                                      <td>{{order.date_ordered}}</td>
+                                      <td>@mdo</td>
+                                        <td><a href="{% url 'export-invoice-pdf' order.order_name_id%}"><button type="button" class="btn btn-outline-dark">View</button></a>
+                                      </td>
+                                    </tr>
+                                  {% endfor %}
+                                  </tbody>
+                                </table>
+                        {% else %}
+                            <div class="text-center h4 text-secondary">No orders placed</div>
+                       {% endif %}
+
+                    </div>
+
+                    <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+  <!-- FOOTER -->
+  <footer class="container pt-1 mt-4">
+    <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#" class="text-reset f-color-primary">Back to top</a></p>
+    <p>&copy; 2022 Zamil Farms. &middot; <a href="#" class="text-reset f-color-primary">Privacy</a> &middot; <a href="#" class="text-reset f-color-primary">Terms</a></p>
+  </footer>
