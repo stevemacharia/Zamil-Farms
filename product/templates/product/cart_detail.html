@@ -1,0 +1,109 @@
+{% include 'main/base.html' %}
+{% load cart_tag %}
+
+<div class="container">
+        <nav class="pb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="text-blue text-decoration-none text-blue" href="/">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page"><a class="text-blue text-decoration-none text-blue" href= "#">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a class="text-blue text-decoration-none text-blue" href= "#">Cart</a></li>
+          </ol>
+        </nav>
+        <div class="row shadow">
+            <div class="cart_section py-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 ">
+                            <div class="cart_container">
+                            {% if request.session.cart|length > 0 %}
+                                <div class="cart_title"><h3 class="fs-4">Shopping Cart<small> ({{request.session.cart|length}}item in your cart) </small></h3>
+                                </div>
+                                <div class="order_total_content text-end">
+                                    <a href="{% url 'cart_clear' %}"><button type="button" class="btn btn-outline-dark">Clear Cart !</button></a>
+                                </div>
+
+                                <div class="cart_items">
+                                    {% for key,value in request.session.cart.items %}
+                                        <ul class="cart_list">
+                                            <li class="cart_item clearfix">
+                                                <div class="cart_item_image">
+                                                    <img src="{{value.image}}" class="w-100" alt="course picture">
+                                                </div>
+                                                <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                                    <div class="cart_item_name cart_info_col">
+                                                        <div class="cart_item_title">Name</div>
+                                                        <div class="cart_item_text">
+                                                            {{value.name}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="cart_item_quantity d-none cart_info_col">
+                                                        <div class="cart_item_title">Quantity</div>
+                                                        <div class="cart_item_text">
+                                                            <a href="{% url 'item_increment' value.product_id %}"><i class="bi bi-plus-square-fill" style="position:relative"></i></a>
+                                                                <small class="p-2">{{value.quantity}} </small>
+                                                            <a href="{% url 'item_decrement' value.product_id %}"><i class="bi bi-dash-square-fill" style="position:relative"> </i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cart_item_price cart_info_col">
+                                                        <div class="cart_item_title">Price</div>
+                                                        <div class="cart_item_text">{{value.price}} {{value.id}} </div>
+                                                    </div>
+                                                    <div class="cart_item_remove cart_info_col">
+                                                        <div class="cart_item_title">Remove Item</div>
+                                                        <div class="cart_item_text">
+                                                            <a href="{% url 'item_clear' id=value.product_id %}">
+                                                                <i class="bi bi-x-square-fill"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cart_item_total cart_info_col">
+                                                        <div class="cart_item_title">Total</div>
+                                                        <div class="cart_item_text" style="color:#28286f">
+                                                            {{ value.price|multiply:value.quantity }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    {% endfor %}
+
+                                </div>
+                                <div class="order_total">
+                                        {% comment %} <a href="{% url 'cart_clear' %}"><button type="button" class="btn btn-outline-dark">Clear Cart !</button></a> {% endcomment %}
+                                        <div class="order_total_content text-end">
+                                            <div class="order_total_title">Order Total:</div>
+                                            <div class="order_total_amount" style="color:#28286f">
+                                                {{ cart_total_amount }}
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="cart_buttons d-flex justify-content-between">
+                                    <a href="/#Products"><button type="button" class="btn btn-outline-dark">Continue Shopping</button></a>
+                                    <a href="{% url 'checkout' %}"><button type="button" class="btn btn-dark rounded-0 border-0" id="WarmBtn">Check-out Now</button></a>
+                                </div>
+                            {% else %}
+                                <div class="py-5">
+                                    <div class="py-4">
+                                        <div>
+                                            <img src="/static/product/images/undraw_empty_cart_co35.svg" class="d-block mx-lg-auto img-fluid" alt="Empty cart!" width="500" height="300" loading="lazy">
+                                        </div>
+                                        <p class="fs-6 pt-2 fst-italic text-center">Cart is empty! Add courses to cart.</p>
+                                        <p class="fw-bold text-center text-decoration-underline"><a href="/#Products" class="text-reset">Browse our courses</a></p>
+                                    </div>
+                                </div>
+
+                            {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <footer class="container ">
+    <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
+    <p>&copy; 2022 MasomoPortal. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>

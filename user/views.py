@@ -40,9 +40,9 @@ def login_request(request):
                 messages.success(request, f"You are now logged in as {username}.")
                 return redirect("profile")
             else:
-                messages.warning(request, "Invalid username or password1.")
+                messages.warning(request, "Invalid username or password.")
         else:
-            messages.warning(request, "Invalid username or password 2.")
+            messages.warning(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request=request, template_name="user/login.html", context={"login_form": form})
 

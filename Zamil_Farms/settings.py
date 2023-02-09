@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'password_reset',
     "verify_email.apps.VerifyEmailConfig",
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.cart_total_amount'
             ],
         },
     },
@@ -90,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'toor',
+        'PASSWORD': 'Bit/2015/29070',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -182,3 +184,5 @@ MAX_RETRIES = 10
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+CART_SESSION_ID = 'cart'

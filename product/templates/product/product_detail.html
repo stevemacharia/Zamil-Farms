@@ -14,7 +14,7 @@
                         <hr>
                         <p class="product-price fw-bold">Kes: {{ product.price }}</p>
                         <div class="d-grid gap-2">
-                            <button name="add_to_cart" type="submit" class="btn btn-dark bg-tertiary">Add to cart</button>
+                            <a class="text-reset" href="{% url 'cart_add' product.id %}"><button name="add_to_cart" type="submit" class="btn btn-dark bg-tertiary">Add to cart</button></a>
                         </div>
                         <p class="py-3">Have a question about our products at E-Store? Feel free to contact our representatives via live chat or email.</p>
                     </div>
