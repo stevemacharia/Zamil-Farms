@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.forms import ImageField
+from phonenumber_field.formfields import PhoneNumberField
 
 COUNTIES = (
     ('', 'Choose...'),
@@ -92,5 +93,12 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['profile_pic', 'phone_number', 'address_county', 'address_city_town']
+
+class UserMobileUpdateForm(forms.ModelForm):
+    phone_number = PhoneNumberField(region="KE")
+
+    class Meta:
+        model = UserProfile
+        fields = ['phone_number']
 
 

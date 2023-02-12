@@ -1,12 +1,12 @@
 {% include 'main/base.html' %}
 {% load cart_tag %}
 
-<div class="container">
+<div class="container mt-3">
         <nav class="pb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="text-blue text-decoration-none text-blue" href="/">Home</a></li>
-             <li class="breadcrumb-item active" aria-current="page"><a class="text-blue text-decoration-none text-blue" href= "#">Products</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a class="text-blue text-decoration-none text-blue" href= "#">Cart</a></li>
+            <li class="breadcrumb-item"><a class="text-dark text-decoration-none text-blue" href="/">Home</a></li>
+             <li class="breadcrumb-item active" aria-current="page"><a class="text-dark text-decoration-none text-blue" href= "#">Products</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a class="text-dark text-decoration-none text-blue" href= "#">Cart</a></li>
           </ol>
         </nav>
         <div class="row shadow">
@@ -37,12 +37,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="cart_item_quantity d-none cart_info_col">
+                                                    <div class="cart_item_quantity  cart_info_col">
                                                         <div class="cart_item_title">Quantity</div>
                                                         <div class="cart_item_text">
-                                                            <a href="#"><i class="bi bi-plus-square-fill" style="position:relative"></i></a>
+                                                            <a href="{% url 'item_increment' value.product_id %}"><i class="bi bi-plus-square-fill" style="position:relative"></i></a>
                                                                 <small class="p-2">{{value.quantity}} </small>
-                                                            <a href="#"><i class="bi bi-dash-square-fill" style="position:relative"> </i></a>
+                                                            <a href="{% url 'item_decrement' value.product_id %}"><i class="bi bi-dash-square-fill" style="position:relative"> </i></a>
                                                         </div>
                                                     </div>
                                                     <div class="cart_item_price cart_info_col">
@@ -52,7 +52,7 @@
                                                     <div class="cart_item_remove cart_info_col">
                                                         <div class="cart_item_title">Remove Item</div>
                                                         <div class="cart_item_text">
-                                                            <a href="#">
+                                                            <a href="{% url 'item_clear' id=value.product_id %}">
                                                                 <i class="bi bi-x-square-fill"></i>
                                                             </a>
                                                         </div>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="cart_buttons d-flex justify-content-between">
                                     <a href="/#Products"><button type="button" class="btn btn-outline-dark">Continue Shopping</button></a>
-                                    <a href="#"><button type="button" class="btn btn-dark rounded-0 border-0" id="WarmBtn">Check-out Now</button></a>
+                                    <a href="{% url 'checkout' %}"><button type="button" class="btn btn-dark rounded-0 border-0" id="WarmBtn">Check-out Now</button></a>
                                 </div>
                             {% else %}
                                 <div class="py-5">
@@ -103,7 +103,7 @@
         </div>
     </div>
     <!-- FOOTER -->
-    <footer class="container ">
+    <footer class="container mt-5">
     <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
     <p>&copy; 2022 MasomoPortal. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
     </footer>

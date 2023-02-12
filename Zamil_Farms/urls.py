@@ -24,14 +24,15 @@ urlpatterns = [
     path('', include('main.urls')),
     path('user/', include('user.urls')),
     path('product/', include('product.urls')),
+    path('orders/', include('orders.urls')),
     path('account/', include('password_reset.urls')),
     path('verification/', include('verify_email.urls')),
 
 
     path('cart/add/<str:id>/', views.cart_add, name='cart_add'),
-    path('cart/item_clear/<int:id>/', views.item_clear, name='item_clear'),
-    path('cart/item_increment/<int:id>/', views.item_increment, name='item_increment'),
-    path('cart/item_decrement/<int:id>/', views.item_decrement, name='item_decrement'),
+    path('cart/item_clear/<str:id>/', views.item_clear, name='item_clear'),
+    path('cart/item_increment/<str:id>/', views.item_increment, name='item_increment'),
+    path('cart/item_decrement/<str:id>/', views.item_decrement, name='item_decrement'),
     path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
     path('cart/cart-detail/', views.cart_detail, name='cart_detail'),
 ]

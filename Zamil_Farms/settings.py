@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'password_reset',
     "verify_email.apps.VerifyEmailConfig",
     'cart',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'toor',
+        'PASSWORD': 'Bit/2015/29070',
         'HOST': 'localhost',
         'PORT': '3306',
     }
