@@ -1,0 +1,12 @@
+{% load cart_tag %}
+{% load crispy_forms_tags %}
+{% include 'alexadashcams/navbar2.html' %}
+<div class="container py-5 mb-5">
+    <div class="alert alert-success" role="alert">
+        <div class="text-center">
+            Thank you for shopping with us, an invoice has been emailed to you. We will contact you shortly. <br>
+            Proceed to <a href="{% url 'profile' %}#orders">Click here </a> to check Your order
+{#            {{ transaction_messages}}#}
+        </div>
+    </div>
+</div>

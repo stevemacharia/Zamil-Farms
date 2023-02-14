@@ -1,0 +1,16 @@
+{% load cart_tag %}
+{% load crispy_forms_tags %}
+{% include 'alexadashcams/navbar.html' %}
+<div class="container py-5 mb-5">
+    <div class="alert alert-primary" role="alert">
+        <div class="text-center">
+            Accept the Mpesa Prompt on your phone  to complete payment.
+        </div>
+    </div>
+    <div class="cart_buttons d-flex justify-content-between">
+        <a href="{% url 'payment_initiate'%}"><button type="button" class="btn btn-outline-danger">Re-initiate payment prompt</button></a>
+        <a href="{% url 'confirmation'%}"><button type="button" class="btn btn-success rounded-0 border-0" >Confirm Payment
+        <div class="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"> </div>
+        </button></a>
+    </div>
+</div>

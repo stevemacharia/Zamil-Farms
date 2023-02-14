@@ -1,0 +1,38 @@
+{% load cart_tag %}
+{% load crispy_forms_tags %}
+{% include 'alexadashcams/navbar2.html' %}
+<div class="container pt-3 mb-5">
+       <ul id="progress-bar" class="progressbar">
+         <li>Checkout</li>
+         <li id="PaymentProgress">Payment</li>
+       </ul>
+    <h4 class="pb-2 fw-bold text-center">Choose Payment Method</h4>
+    <h5 class="text-start fw-bolder text-dark mb-1 pt-2 text-center">Invoice Code: {{ order_id }}</h5>
+    <h5 class="text-start fw-bolder text-blue mb-1 pt-2 text-center">Total Ammount to pay : (Kes) {{ total_amount }}</h5>
+
+    <div class="px-3">
+        <div class="pt-3">
+              <div class="row justify-content-center">
+                <div class="col-sm-4">
+                    <div class="card shadow-sm border-0" id="PaymentCard1">
+                          <div class="card-body">
+                              <small class="lh-lg">1. Pay using your Pesapal</small>
+                                <a href="/payments/pesapal"><div class="Pesapal"></div></a>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card shadow-sm border-0" id="PaymentCard2">
+                          <div class="card-body">
+                              <small class="lh-lg">2.Pay cash on Delivery</small>
+                              <a href="/orders/add/"><div class="PesapalLogo"></div></a>
+                          </div>
+                    </div>
+
+                </div>
+              </div>
+        </div>
+    </div>
+
+</div>
+  <!-- FOOTER -->

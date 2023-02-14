@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from user.models import UserProfile
 from .forms import UserUpdateForm, ProfileUpdateForm
-
+from django.http import HttpResponseRedirect
 
 def register_request(request):
     if request.method == "POST":
@@ -38,7 +38,8 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"You are now logged in as {username}.")
-                return redirect("profile")
+                # return redirect("profile")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'), )
             else:
                 messages.warning(request, "Invalid username or password.")
         else:

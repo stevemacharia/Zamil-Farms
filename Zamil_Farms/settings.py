@@ -93,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'Bit/2015/29070',
+        'PASSWORD': 'toor',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -156,7 +156,7 @@ EMAIL_HOST = 'mail.arieshelby.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'info@arieshelby.com'
-EMAIL_HOST_PASSWORD = 'c0d3bl00d3d'
+EMAIL_HOST_PASSWORD = 'g.x!wuIQ.5Pl'
 
 LOGIN_REDIRECT_URL = 'profile'
 # end of email config
