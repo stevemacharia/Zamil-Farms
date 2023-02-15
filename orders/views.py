@@ -14,7 +14,9 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
 from django.shortcuts import render
 from user.models import UserProfile
-
+from product.models import Product
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
 
 @login_required
 def checkout(request):
@@ -51,7 +53,86 @@ def checkout(request):
         return redirect('profile')
 
 
+@login_required
+def order_add(request):
+    payment_options = 'Cash On Delivery'
+    global shortcode
+    shortcode = str(uuid.uuid4())[:5]
+    current_user = request.user
+    global userinfo
+    userinfo = User.objects.get(username=current_user)
+    total_bill = 0.0
+    for key, value in request.session['cart'].items():
+        total_bill = total_bill + (float(value['price']) * value['quantity'])
+    cart_total_amount_b = ("{:.2f}".format(total_bill))
 
+    if not request.session['cart']:
+        messages.warning(request, f'Your Shopping cart is empty! Start Shopping.')
+        return redirect('checkout')
+    else:
+        T1 = Order(
+            order_name_id=shortcode,
+            payment_method=payment_options,
+            order_amount=cart_total_amount_b,
+            customer_id=current_user,
+        )
+        T1.save()
+        for key, value in request.session['cart'].items():
+            Product.objects.filter(id=value['product_id']).exists()
+            # new_product_quantity = Product.objects.get(id=value['product_id'])
+            # new_product_quantity.product_quantity = F('product_quantity') - value['quantity']
+            # new_product_quantity.save()
+            T2 = OrderDetail(
+                order_name_id=shortcode,
+                product_id=value['product_id'],
+                product_name=value['name'],
+                product_quantity=value['quantity'],
+                product_price=value['price'],
+            )
+            T2.save()
+
+
+        # cart = Cart(request)
+        # cart.clear()
+        return redirect('cash_invoice', order_id=shortcode)
+
+
+def cash_invoice(request, order_id, *args, **kwargs):
+    shortcode = order_id
+    template_name = get_template('orders/cash_invoice.html')
+    OrderModel = Order.objects.get(order_name_id=shortcode)
+    user = request.user
+    if Order.objects.filter(order_name_id=shortcode).exists():
+        context = {
+            'customerorder': Order.objects.filter(order_name_id=shortcode),
+            'customerorderdetail': OrderDetail.objects.filter(order_name_id=shortcode),
+            'user': user,
+        }
+        rendered_html = template_name.render(context)
+        pdf_file = HTML(string=rendered_html).write_pdf()
+        ########## Update Orders Model ##############
+        OrderModel.invoice_doc = SimpleUploadedFile('MasomoPortal Invoice-' + OrderModel.order_name_id + '.pdf',
+                                                    pdf_file,
+                                                    content_type='application/pdf')
+        OrderModel.save()
+        ############################################
+        ######################## mail system ####################################
+        htmly = get_template('user/email_invoice.html')
+        base_dir = settings.MEDIA_ROOT
+        d = {
+            'username': user,
+            'invoice_no': shortcode,
+        }
+        subject, from_email, to, bcc = 'ZAMIL FARM INVOICE', settings.EMAIL_HOST_USER, user.email, 'info@arieshelby.com'
+        html_content = htmly.render(d)
+        msg = EmailMultiAlternatives(subject, html_content, from_email, [to], [bcc])
+        msg.attach_alternative(html_content, "text/html")
+        msg.attach_file(OrderModel.invoice_doc.path)
+        msg.send()
+        # ##################################################################
+        # return HttpResponse(rendered_html)
+        # return render(request, 'orders/cash_invoice.html', context)
+        return render(request, 'payments/payment_messages.html', context)
 
 
 
@@ -81,4 +162,8 @@ class LabelsView(LoginRequiredMixin, PDFView):
         OrderModel.save()
 
         return context
+
+
+
+
 

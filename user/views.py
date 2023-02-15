@@ -7,6 +7,7 @@ from verify_email.email_handler import send_verification_email
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from user.models import UserProfile
+from orders.models import Order, OrderDetail
 from .forms import UserUpdateForm, ProfileUpdateForm
 from django.http import HttpResponseRedirect
 
@@ -38,8 +39,8 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"You are now logged in as {username}.")
-                # return redirect("profile")
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'), )
+                return redirect("profile")
+                # return HttpResponseRedirect(request.META.get('HTTP_REFERER'), )
             else:
                 messages.warning(request, "Invalid username or password.")
         else:
@@ -75,11 +76,13 @@ def profile(request):
             messages.warning(request, f'Failed to update your details, Kindly retry again. ')
             return redirect('profile')
     else:
+        orders = Order.objects.filter(customer_id=userinfo)
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(request.FILES, instance=request.user.userprofile)
         context = {
             'user': request.user,
             'u_form': u_form,
             'p_form': p_form,
+            'orders': orders,
         }
     return render(request, 'user/profile.html', context)

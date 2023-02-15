@@ -6,7 +6,7 @@ from product.models import Product
 from django.contrib import messages
 from django_pesapal.views import PaymentRequestMixin
 from django.views.generic import TemplateView
-from orders.models import CustomerOrder, CustomerOrderDetails
+from orders.models import Order, OrderDetail
 from django_pesapal.models import Transaction
 from django.db.models import F
 from django.template.loader import get_template
@@ -15,6 +15,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from cart.cart import Cart
+from user.models import UserProfile
 
 
 class PaymentView(TemplateView, PaymentRequestMixin):
@@ -31,7 +32,7 @@ class PaymentView(TemplateView, PaymentRequestMixin):
             total_bill = total_bill + (float(value['price']) * value['quantity'])
         cart_total_amount_b = ("{:.2f}".format(total_bill))
 
-        if StudentProfile.objects.filter(user=current_user).exists():
+        if UserProfile.objects.filter(user=current_user).exists():
             UserDetail = UserProfile.objects.get(user=current_user)
             if not self.request.session['cart']:
                 messages.warning(self.request, f'Your Shopping cart is empty! Start Shopping.')
@@ -46,13 +47,6 @@ class PaymentView(TemplateView, PaymentRequestMixin):
                 T1.save()
                 for key, value in self.request.session['cart'].items():
                     if Product.objects.filter(id=value['product_id']).exists():
-                        EnrolledCourse = Product.objects.get(id=value['product_id'])
-                        if Course.objects.get(product=EnrolledCourse):
-                            NewCourse = Course.objects.get(product=EnrolledCourse)
-                            NewCourse.students.add(User.objects.get(id=self.request.user.id))
-                        else:
-                            messages.warning(self.request, f'Failed to Enroll to course')
-                            return redirect('checkout')
                         T2 = OrderDetail(
                             order_name_id=shortcode,
                             product_id=value['product_id'],
@@ -98,7 +92,7 @@ def payment_confirmation(request):
     if Transaction.objects.filter(merchant_reference=order_id, payment_status=payment_status_completed):
         shortcode = order_id
         template_name = get_template('orders/paid_invoice.html')
-        OrderModel = CustomerOrder.objects.get(order_name_id=shortcode)
+        OrderModel = Order.objects.get(order_name_id=shortcode)
         user = request.user
         ###########Update payment method on orders model########
         current_transaction = Transaction.objects.get(merchant_reference=order_id,
@@ -107,21 +101,21 @@ def payment_confirmation(request):
         OrderModel.payment_method = pesapal_payment_method
         OrderModel.save()
         ##########################
-        if CustomerOrder.objects.filter(order_name_id=shortcode).exists():
+        if Order.objects.filter(order_name_id=shortcode).exists():
             context = {
-                'customerorder': CustomerOrder.objects.filter(order_name_id=shortcode),
-                'customerorderdetail': CustomerOrderDetails.objects.filter(order_name_id=shortcode),
+                'customerorder': Order.objects.filter(order_name_id=shortcode),
+                'customerorderdetail': OrderDetail.objects.filter(order_name_id=shortcode),
                 'user': user,
             }
             rendered_html = template_name.render(context)
             pdf_file = HTML(string=rendered_html).write_pdf()
 
             ########## Update Orders Model ##############
-            OrderModel.invoice_doc = SimpleUploadedFile('Alexadashcams Invoice-' + OrderModel.order_name_id + '.pdf',
+            OrderModel.invoice_doc = SimpleUploadedFile('Zamil Farm Invoice-' + OrderModel.order_name_id + '.pdf',
                                                         pdf_file,
                                                         content_type='application/pdf')
             OrderModel.save()
-            # ##############################
+            #############################################
             ######################## mail system ####################################
             htmly = get_template('users/email_invoice.html')
             base_dir = settings.MEDIA_ROOT
@@ -129,7 +123,7 @@ def payment_confirmation(request):
                 'username': user,
                 'invoice_no': shortcode,
             }
-            subject, from_email, to, bcc = 'ALEXADASHCAMS INVOICE', settings.EMAIL_HOST_USER, user.email, 'info@arieshelby.com'
+            subject, from_email, to, bcc = 'ZAMIL FARM INVOICE', settings.EMAIL_HOST_USER, user.email, 'info@arieshelby.com'
             html_content = htmly.render(d)
             msg = EmailMultiAlternatives(subject, html_content, from_email, [to], [bcc])
             msg.attach_alternative(html_content, "text/html")

@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'user.apps.UserConfig',
     'main.apps.MainConfig',
+    'payments.apps.PaymentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +49,8 @@ INSTALLED_APPS = [
     "verify_email.apps.VerifyEmailConfig",
     'cart',
     'orders',
+    'django_pesapal',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'toor',
+        'PASSWORD': 'Bit/2015/29070',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -187,3 +191,27 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 CART_SESSION_ID = 'cart'
+
+
+# start of pesapal settings
+PESAPAL_DEMO = True
+PESAPAL_OAUTH_CALLBACK_URL = "transaction_completed"
+PESAPAL_OAUTH_SIGNATURE_METHOD = "SignatureMethod_HMAC_SHA1"
+PESAPAL_TRANSACTION_DEFAULT_REDIRECT_URL = 'payment_confirmation'
+PESAPAL_TRANSACTION_FAILED_REDIRECT_URL = 'payment_failed'
+# demo
+PESAPAL_IFRAME_LINK = 'https://demo.pesapal.com/api/PostPesapalDirectOrderV4'
+PESAPAL_QUERY_STATUS_LINK = 'https://demo.pesapal.com/API/QueryPaymentDetails'
+# live
+PESAPAL_IFRAME_LINK = 'https://www.pesapal.com/api/PostPesapalDirectOrderV4'
+PESAPAL_QUERY_STATUS_LINK = 'https://www.pesapal.com/API/QueryPaymentDetails'
+
+PESAPAL_ITEM_DESCRIPTION = False
+PESAPAL_TRANSACTION_MODEL = "django_pesapal.Transaction"
+PESAPAL_CONSUMER_KEY = "b+BM/9n9fVanuT5gYne9DUCWkhwlQBE4"
+PESAPAL_CONSUMER_SECRET = "xwFVOFbec+0cHR9OmSom5CkHexQ="
+# PESAPAL_CONSUMER_KEY = "fr4XbPJ6xttNMyYGcBgT4/HiVTw8P/8H"
+# PESAPAL_CONSUMER_SECRET = "d7U7lGqnSRO+dBG6I28MGmbrgeI="
+PESAPAL_REDIRECT_WITH_REFERENCE	= True
+# Override pesapal keysis needs to be a reversible
+# end of pesapal settings

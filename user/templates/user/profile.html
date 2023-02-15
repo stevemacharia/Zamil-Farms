@@ -85,21 +85,19 @@
                                   <thead>
                                     <tr>
                                       <th scope="col">#</th>
-                                      <th scope="col">Order Ref</th>
+                                      <th scope="col">Order Ref Code</th>
                                       <th scope="col">Date Ordered</th>
-                                      <th scope="col">Price</th>
                                       <th scope="col">View</th>
                                     </tr>
                                   </thead>
                                   <tbody class="table-group-divider">
                                   {% for order in orders%}
                                     <tr>
-                                      <th scope="row">1</th>
+
+                                      <td>{{ forloop.counter }}</td>
                                       <td>#{{order.order_name_id}}</td>
                                       <td>{{order.date_ordered}}</td>
-                                      <td>@mdo</td>
-                                        <td><a href="{% url 'export-invoice-pdf' order.order_name_id%}"><button type="button" class="btn btn-outline-dark">View</button></a>
-                                      </td>
+                                      <td><a href="{{order.invoice_doc.url }}"><button type="button" class="btn btn-outline-dark">View</button></a></td>
                                     </tr>
                                   {% endfor %}
                                   </tbody>
