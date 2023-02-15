@@ -1,5 +1,5 @@
 {% include 'main/base.html' %}
-
+{% load crispy_forms_tags %}
     <div class="container-fluid mx-0 py-5" id="slider">
         <div class="container">
             <div class="row  py-5 align-items-center ">
@@ -56,9 +56,11 @@
                                                       </div>
                                                 </div>
                                           </a>
-                                    <div class="d-grid gap-2">
+                                    <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
+                                        <div class="d-grid gap-2">
                                             <button class="btn btn-dark bg-tertiary" type="button">Add to cart</button>
-                                    </div>
+                                       </div>
+                                    </a>
                               </div>
                         {% endfor %}
                     </div>
@@ -142,19 +144,15 @@
                   <div class="col-sm-4 px-4 text-left" id="ContactUs">
                       <h4 class="title fw-bolder f-color-primary">Contact us</h4>
                        <div class="contact-form-wrapper d-flex py-0">
-                           <form>
-                                <div class="mb-3">
-                                  <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="exampleFormControlTextarea1" class="form-label">Enter Message</label>
-                                  <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message" rows="3"></textarea>
-                                </div>
-                               <div class="d-grid gap-2">
-                                  <button class="btn btn-dark bg-tertiary border-0 rounded-0" type="button">Send Message</button>
-                                </div>
-                           </form>
+                            <form action="/visitormessage/" class="contact-form text-start"  method="POST" enctype="multipart/form-data">
+                              <p class="description">Feel free to contact us if you need any assistance.
+                              </p>
+                                {% csrf_token %}
+                                {{ v_form|crispy }}
+                              <div class="submit-button-wrapper">
+                                <button class="btn btn-dark bg-tertiary" type="submit">Send</button>
+                              </div>
+                            </form>
                        </div>
                   </div>
                   <div class="col-sm-4">

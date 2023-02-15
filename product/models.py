@@ -3,10 +3,20 @@ from PIL import Image
 from django.utils import timezone
 import uuid
 
-# Create your models here.
+class ProductCategory(models.Model):
+    product_category_id = models.CharField(primary_key=True, default=uuid.uuid4, blank=True, editable=False, max_length=100)
+    category_name = models.CharField(max_length=255, null=False)
+
+    def __str__(self):
+        return f'{self.category_name} Category'
+
+    class Meta:
+        verbose_name = "Product Categories"
+
 # Create your models here.
 class Product(models.Model):
     id = models.CharField(primary_key=True, default=uuid.uuid4, blank=True, editable=False, max_length=100)
+    product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, blank=True, null=True,)
     product_name = models.CharField(max_length=255, null=False, unique=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
     date_created = models.DateTimeField(default=timezone.now)
@@ -30,6 +40,7 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.product_name}'
+
 
 
 class ProductImage(models.Model):

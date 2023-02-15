@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Messages
 from django.forms import ImageField
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -102,3 +102,12 @@ class UserMobileUpdateForm(forms.ModelForm):
         fields = ['phone_number']
 
 
+class VisitorMessagesForm(forms.ModelForm):
+    username = forms.CharField(max_length=20)
+    email = forms.EmailField()
+    message = forms.Textarea()
+
+    # specify the name of model to use
+    class Meta:
+        model = Messages
+        fields = ['username', 'email', 'message']

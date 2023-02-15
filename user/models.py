@@ -19,3 +19,17 @@ class UserProfile(models.Model):
 
     class Meta:
         verbose_name = "User Profile"
+
+
+class Messages(models.Model):
+    STATUS_CHOICES = [
+        ('New', 'New'),
+        ('Replied', 'Replied'),
+    ]
+    username = models.CharField(max_length=255, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    message = models.TextField(max_length=500, null=False, blank=False)
+    status = models.CharField(choices=STATUS_CHOICES, default='New', max_length=100, blank=True)
+
+    class Meta:
+        verbose_name = "Visitor Message"

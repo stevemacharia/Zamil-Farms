@@ -7,6 +7,7 @@ from django.db.models import Q, Sum
 from cart.cart import Cart
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from user.forms import VisitorMessagesForm
 
 
 class ProductDetailView(DetailView):
@@ -21,6 +22,19 @@ class ProductDetailView(DetailView):
         # context = {'NewPrice': 12345}
         # context['Total_Accessory_Price']= "{:.2f}".format(Dict['product_price__sum'])
         return context
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product/product_list.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'courses'
+
+    def get_context_data(self, **kwargs):
+        et = super(ProductListView, self).get_context_data(**kwargs)
+        et['products'] = Product.objects.order_by('-date_created')[:12]
+        et['NewProducts'] = Product.objects.order_by('-date_created')[:4]
+        et['v_form'] = VisitorMessagesForm()
+        return et
+
 
 
 def cart_add(request, id):
