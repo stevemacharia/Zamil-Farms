@@ -35,8 +35,7 @@ class ProductListView(ListView):
         et['v_form'] = VisitorMessagesForm()
         return et
 
-
-
+# start of cart
 def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
@@ -74,3 +73,56 @@ def cart_clear(request):
 
 def cart_detail(request):
     return render(request, 'product/cart_detail.html')
+# end of cart
+
+
+
+# start of product list filter
+def ProductList(request):
+    if request.method == 'POST':
+        if request.POST.get('RadioCourse'):
+            template_name = 'products'
+            value = request.POST.get('RadioCourse')
+            sort_by = value
+            if sort_by == "all_level":
+                # dc means date created
+                products = Product.objects.order_by('-date_created')[:12]
+                R = 'all_level'
+                context = {
+                    'products': products,
+                    'radio': R
+
+                }
+            elif sort_by == "beginner":
+                # lp means low to high product price
+                products = Product.objects.filter(level='Beginner')
+                R = 'beginner'
+                context = {
+                    'products': products,
+                    'radio': R
+
+                }
+            elif sort_by == "Intermediate":
+                # hp means high to low product price
+                products = Product.objects.filter(level='Intermediate')
+                R = 'Intermediate'
+                context = {
+                    'products': products,
+                    'radio': R
+
+                }
+            elif sort_by == "Expert":
+                products = Product.objects.filter(level='Expert')
+                R = 'Expert'
+                context = {
+                    'products': products,
+                    'radio': R
+                }
+    else:
+        products = Product.objects.all()
+        context = {
+            'products': products,
+        }
+    return render(request, 'product/product_list.html', context)
+
+# end of product list filter

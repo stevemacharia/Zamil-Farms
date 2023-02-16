@@ -2,45 +2,79 @@
 
 <div class="container py-3 text-start">
     <div class="row">
-      <div class="col-sm-2  border px-0">
-        <div class="ms-3">
-          <h5 class="fw-bold text-blue pt-3">Sort By Category</h5>
-          <div class="ps-2">
+          <div class="col-sm-2  border px-0">
+                <div class="mx-3">
+                      <h5 class="fw-bold text-blue pt-3">Sort By Price</h5>
+                      <div class="ps-2">
+                          <form method="POST" enctype="multipart/form-data" id="CourseListForm" action="{% url 'product-list'%}">
+                               {% csrf_token %}
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="RadioCourse" id="all_level" value="all_level" {% if radio == "all_level" %}checked="checked" {% endif %}/>
+                                  <label class="form-check-label" for="all_level">
+                                    All Levels
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="RadioCourse" id="beginner" value="beginner"
+                                    {% if radio == "beginner" %}
+                                    checked="checked"
+                                    {% endif %}/>
 
+                                  <label class="form-check-label" for="beginner">
+                                    Beginner
+                                  </label>
+                                </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="RadioCourse" id="Intermediate" value="Intermediate" {% if radio == "Intermediate" %}checked="checked" {% endif %}/>
+                                  <label class="form-check-label" for="Intermediate">
+                                    Intermediate
+                                  </label>
+                                </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="RadioCourse" id="Expert" value="Expert" {% if radio == "Expert" %}checked="checked" {% endif %}/>
+                                  <label class="form-check-label" for="Expert">
+                                    Expert
+                                  </label>
+                                </div>
+                          </form>
+                          <hr>
+                      </div>
+                      <h5 class="fw-bold text-blue pt-0">Sort By Category</h5>
+                </div>
           </div>
-        </div>
-      </div>
 
       <div class="col-sm-10 p-4">
          <h2 class="fw-bolder headers text-blue text-left">Products</h2>
-         <div class="row">
-            {% if products %}
-                {% for product in products%}
-                <!-- individual card starts -->
-                    <div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
-                        <div class="product">
-                            <img src="{{product.image.url}}" style="height:200px; object-fit: cover;" alt="">
-                            <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
-                                <li class="icon"><a class="text-reset" href="{% url 'cart_add' product.id %}"><i class="bi bi-bag-check-fill"></i></a></li>
-                            </ul>
+            <section>
+                  <div class="container py-2">
+                        <div class="row row-cols-1 bg-main row-cols-lg-4 row-cols-md-2 g-4">
+                            {% for product in products %}
+                                  <div class="col mb-4 bg-light shadow-sm py-3">
+                                        <div class="bg-image">
+                                                {% if product.productimage_set.first.image.url == "" %}
+                                                    <img class="ProductImages" src="/static/main/images/zamil_farm_default.jpg"  style="height:200px; object-fit: cover;" alt="...">
+                                                {% else %}
+                                                    <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
+                                                {% endif %}
+                                              <a href="{% url 'product-detail' product.id %}">
+                                                    <div class="mask" style="background-color: rgba(0, 0, 0, 0);">
+                                                          <div class="d-flex justify-content-start align-items-start h-100">
+                                                            <h4><span class="badge bg-light pt-2 ms-2 mt-3 f-color-primary">{{product.product_name}}</span></h4>
+                                                            <h4><span class="badge bg-light pt-2 ms-2 mt-3 text-dark">Kes: {{product.price}}</span></h4>
+                                                          </div>
+                                                    </div>
+                                              </a>
+                                        </div>
+                                        <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-dark bg-tertiary" type="button">Add to cart</button>
+                                            </div>
+                                        </a>
+                                  </div>
+                            {% endfor %}
                         </div>
-                        <div class="title pt-4 pb-1">
-                            <a class="text-dark text-decoration-none text-blue" href= "{% url 'product-detail' product.id %}">{{product.name}}</a>
-                        </div>
-                        <div class="d-flex align-content-center justify-content-center">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <div class="price">Kes: {{product.price}}</div>
-                    </div>
-                <!-- individual card ends -->
-                {% endfor %}
-           {% else %}
-              <div class="text-center h4 text-dark pb-5 text-secondary">No Products to show</div>
-             <div>
-                 <img src="/static/main/images/undraw_no_data_re_kwbl.svg" class="d-block mx-lg-auto img-fluid" alt="Empty cart!" width="500" height="300" loading="lazy">
-             </div>
-           {% endif %}
-         </div>
+                  </div>
+            </section>
         </div>
       </div>
     </div>
