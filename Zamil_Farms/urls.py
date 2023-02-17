@@ -27,6 +27,7 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
     path('payments/', include('payments.urls')),
     path('payments/', include('django_pesapal.urls')),
+    path('blog/', include('blog.urls')),
     path('account/', include('password_reset.urls')),
     path('verification/', include('verify_email.urls')),
 

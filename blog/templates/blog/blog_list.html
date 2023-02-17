@@ -1,0 +1,33 @@
+{% include 'main/base.html' %}
+<div class="container py-3">
+    <div id="OurStoryImage">
+        <h1 class="fw-bolder display-4 text-center pt-5 text-light"> Our Blog</h1>
+        <h6 class="text-center fs-6 text-light pb-5 ">Expand your knowledge and broaden your horizons with our blog posts.</h6>
+    </div>
+    <section class="pt-5 mt-5">
+        {% for blog in blogs %}
+            <div class="card mb-3 mx-auto bg-transparent shadow-sm border-0" style="max-width: 840px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{ blog.blog_image.url }}" class="img-fluid rounded-start"  alt="Zamil_Farm_Blog_image">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body px-5">
+                      <a class="text-decoration-none" href="{% url 'blog-detail' blog.id %}"><h2 class="card-title f-color-primary fw-bold">{{ blog.title }}</h2></a>
+                    <p class="card-text">{{ blog.description}}</p>
+                    <p class="card-text"><small class="text-muted fw-bold f-color-secondary pe-4">Author: {{ blog.author }}</small> <small class="text-muted f-color-secondary fw-bold">Last updated on {{ blog.updated_on }}</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+    </section>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="container pt-2 mt-4">
+<p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
+<p>&copy; 2022 Zamil Farm. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+<!-- FOOTER -->

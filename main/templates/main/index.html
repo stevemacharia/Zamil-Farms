@@ -91,40 +91,18 @@
         <h1 class="fw-bolder display-4 text-center pb-4 f-color-primary">Our Latest News</h1>
         <div class="container px-4 py-5" id="hanging-icons">
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-              <div class="col d-flex align-items-start">
-                <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
-                </div>
-                <div>
-                  <h3 class="fs-2">Featured title</h3>
-                  <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                  <a href="#" class="btn btn-dark bg-tertiary">Read More</a>
-                </div>
-              </div>
-              <div class="col d-flex align-items-start">
-                <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
-                </div>
-                <div>
-                  <h3 class="fs-2">Featured title</h3>
-                  <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                  <a href="#" class="btn btn-primary">
-                    Primary button
-                  </a>
-                </div>
-              </div>
-              <div class="col d-flex align-items-start">
-                <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
-                </div>
-                <div>
-                  <h3 class="fs-2">Featured title</h3>
-                  <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                  <a href="#" class="btn btn-primary">
-                    Primary button
-                  </a>
-                </div>
-              </div>
+                {% for blog in blogs %}
+                  <div class="col d-flex align-items-start">
+                    <div class="card bg-transparent" style="width: 18rem;">
+                      <img src="{{ blog.blog_image.url }}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h4 class="card-title fw-bolder f-color-primary">{{ blog.title }}</h4>
+                          <p class="card-text" style="text-align: justify;">{{ blog.description }}</p>
+                          <button class="btn btn-dark bg-tertiary" type="button">Read More</button>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
             </div>
         </div>
     </div>

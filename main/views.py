@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from user.forms import VisitorMessagesForm
 from django.db.models import Q, Sum
 from django.contrib import messages
+from blog.models import Blog
 
 # Create your views here.
 
@@ -25,6 +26,7 @@ class ProductListView(ListView):
         et['products'] = Product.objects.order_by('-date_created')[:12]
         et['NewProducts'] = Product.objects.order_by('-date_created')[:4]
         et['v_form'] = VisitorMessagesForm()
+        et['blogs'] = Blog.objects.order_by('-date_created')[:3]
         return et
 
 

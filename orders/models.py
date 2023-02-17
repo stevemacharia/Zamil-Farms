@@ -20,7 +20,7 @@ class OrderDetail(models.Model):
     order_name = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_id = models.CharField(max_length=100)
     product_name = models.CharField(max_length=100)
-    product_quantity = models.IntegerField(max_length=100, default=0)
+    product_quantity = models.IntegerField(default=0)
     product_price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
