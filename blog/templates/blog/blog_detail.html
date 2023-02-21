@@ -1,4 +1,36 @@
 {% include 'main/base.html' %}
-<div class="container py-3">
-    <h3 class="f-color-secondary fw-bold">{{ blog.title }}</h3>
+<div class="container mb-5 pb-5 mt-3" id="OurStory">
+    <div id="OurStoryImage">
+        <h3 class="fw-bolder text-center pt-5 text-light"> {{blog.title}}</h3>
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm-6">
+                <h6 class="text-center fs-6 text-light pb-5 ">{{blog.description}}</h6>
+            </div>
+            <div class="col-sm">
+            </div>
+        </div>
+    </div>
+    <div class="container pt-5 text-left">
+         <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm-6">
+                {{blog.body|safe}}
+            </div>
+            <div class="col-sm">
+            </div>
+         </div>
+    </div>
 </div>
+
+
+
+
+<!-- FOOTER -->
+<footer class="container pt-1 mt-4">
+<p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
+<p>&copy; 2022 Zamil Farm. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+<!-- FOOTER -->

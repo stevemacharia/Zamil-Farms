@@ -31,6 +31,7 @@ urlpatterns = [
     path('account/', include('password_reset.urls')),
     path('verification/', include('verify_email.urls')),
 
+    path('tinymce/', include('tinymce.urls')),
 
     path('cart/add/<str:id>/', views.cart_add, name='cart_add'),
     path('cart/item_clear/<str:id>/', views.item_clear, name='item_clear'),

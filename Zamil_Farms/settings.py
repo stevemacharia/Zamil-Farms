@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'orders',
     'django_pesapal',
     'django.contrib.sites',
+    'django_quill',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -216,3 +218,5 @@ PESAPAL_CONSUMER_SECRET = "xwFVOFbec+0cHR9OmSom5CkHexQ="
 PESAPAL_REDIRECT_WITH_REFERENCE	= True
 # Override pesapal keysis needs to be a reversible
 # end of pesapal settings
+
+
