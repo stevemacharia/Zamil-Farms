@@ -111,7 +111,7 @@ def cash_invoice(request, order_id, *args, **kwargs):
         rendered_html = template_name.render(context)
         pdf_file = HTML(string=rendered_html).write_pdf()
         ########## Update Orders Model ##############
-        OrderModel.invoice_doc = SimpleUploadedFile('MasomoPortal Invoice-' + OrderModel.order_name_id + '.pdf',
+        OrderModel.invoice_doc = SimpleUploadedFile('Zamil Farms Invoice-' + OrderModel.order_name_id + '.pdf',
                                                     pdf_file,
                                                     content_type='application/pdf')
         OrderModel.save()
@@ -143,7 +143,7 @@ class LabelsView(LoginRequiredMixin, PDFView):
     """
     template_name = 'orders/pdf_invoice.html'
 
-    download_name = 'Masomo Portal Invoices' + \
+    download_name = 'Zamil Farms Invoices' + \
                     str(datetime.datetime.now()) + '.pdf'
     prompt_download = True
 

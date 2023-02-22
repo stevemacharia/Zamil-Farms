@@ -32,7 +32,7 @@
       background-attachment: fixed;
 }
   #slider{
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/zamil_farms_slider_two.jpg");
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/Zamil_farms_slider.jpeg");
       background-size: cover;
       width: 100%;
       background-position: center;
@@ -40,14 +40,21 @@
       background-attachment: fixed;
   }
   #OurStoryImage{
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/zamil_farms__about_us.jpg");
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/Zamil_farms_about_us.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+  }
+  #OurBlog{
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/Zamil_farms_blog.jpeg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
 
   }
   #CutOffGoat{
-      background: url("/static/main/images/zamil_farm_goat.png");
+      background: url("/static/main/images/zamil_farm_goat.jpeg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
