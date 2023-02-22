@@ -15,16 +15,15 @@ STATUS = (
 
 class Blog(models.Model):
     title = models.CharField(max_length=255, null=False, unique=True)
-    description = models.TextField(max_length=160)
-    content = models.TextField(blank=True, null=False, default="description")
-    content2 = QuillField(blank=True, null=False, default="description")
+    description = models.TextField(max_length=160, default="Brief Description")
+    content = HTMLField(blank=True, null=False, default="Full Blog Post")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
     blog_image = models.ImageField(upload_to='blog_pics', blank=True, null=False,
                                    default='product_pics/zamil_farm_product.png')
-    body = HTMLField(blank=True, null=False, default="description")
+
 
     class Meta:
         verbose_name = "Blog"
