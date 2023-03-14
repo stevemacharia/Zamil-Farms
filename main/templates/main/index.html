@@ -41,18 +41,19 @@
               <div class="container py-2">
                     <div class="row row-cols-1 bg-main row-cols-lg-4 row-cols-md-2 g-4">
                         {% for product in products %}
-                              <div class="col mb-4 bg-light shadow-sm py-3">
+                              <div class="col mb-4 py-3">
                                     <div class="bg-image">
                                             {% if product.productimage_set.first.image.url == "" %}
                                                 <img class="ProductImages" src="/static/main/images/zamil_farm_default.jpg"  style="height:200px; object-fit: cover;" alt="...">
                                             {% else %}
                                                 <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
                                             {% endif %}
-                                          <a href="{% url 'product-detail' product.id %}">
-                                                <div class="mask" style="background-color: rgba(0, 0, 0, 0);">
+                                          <p class="pt-2 fst-italic fw-semibold text-lowercase text-muted mb-0">{{product.product_category}}</p>
+                                          <a href="{% url 'product-detail' product.id %}" class="pt-0">
+                                                <div class="mask" style="">
                                                       <div class="d-flex justify-content-start align-items-start h-100">
-                                                        <h4><span class="badge bg-light pt-2 ms-2 mt-3 f-color-primary">{{product.product_name}}</span></h4>
-                                                        <h4><span class="badge bg-light pt-2 ms-2 mt-3 text-dark">Kes: {{product.price}}</span></h4>
+                                                        <h4><span class="badge ps-0 f-color-primary">{{product.product_name}}</span></h4>
+                                                        <h4><span class="badge text-dark">Kes: {{product.price}}</span></h4>
                                                       </div>
                                                 </div>
                                           </a>
@@ -96,7 +97,7 @@
                     <div class="card bg-transparent" style="width: 18rem;">
                       <img src="{{ blog.blog_image.url }}" class="card-img-top" alt="...">
                       <div class="card-body">
-                          <h4 class="card-title fw-bolder f-color-primary">{{ blog.title }}</h4>
+                          <a class="text-decoration-none" href="{% url 'blog-detail' blog.id %}"><h4 class="card-title fw-bolder f-color-primary">{{ blog.title }}</h4></a>
                           <p class="card-text" style="text-align: justify;">{{ blog.description }}</p>
                           <button class="btn btn-dark bg-tertiary" type="button">Read More</button>
                       </div>

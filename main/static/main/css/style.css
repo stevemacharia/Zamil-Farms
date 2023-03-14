@@ -24,7 +24,7 @@
     }
 }
 #AuthBg{
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/zamil_farms_slider_two.jpg");
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/main/images/zamil_farms_login.jpeg");
       background-size: cover;
       width: 100%;
       background-position: center;

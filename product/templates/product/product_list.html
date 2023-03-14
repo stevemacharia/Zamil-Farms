@@ -2,56 +2,137 @@
 
 <div class="container py-3 text-start">
     <div class="row">
-          <div class="col-sm-2  border px-0">
-                <div class="mx-3">
-                      <h5 class="fw-bold text-blue pt-3">Sort By Price</h5>
-                      <div class="ps-2">
-
-                          <hr>
-                      </div>
-                      <h5 class="fw-bold text-blue pt-0">Sort By Category</h5>
-                </div>
+          <div class="col-sm-3  border px-2">
+                <h5 class="fw-bold ps-2 pt-3 f-color-primary">Sort by Price</h5>
+              <ul class="list-group list-group-flush px-4" id="myTab" role="tablist">
+                  <li class="list-group-item bg-transparent px-0" role="presentation">
+                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Default sorting</a>
+                  </li>
+                  <li class="list-group-item bg-transparent px-0" role="presentation">
+                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Price: Low to High</a>
+                  </li>
+                  <li class="list-group-item bg-transparent px-0" role="presentation">
+                    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Price: High to Low</a>
+                  </li>
+              </ul>
+              <h5 class="fw-bold ps-2 pt-3 f-color-primary">Sort by Category</h5>
+                  <form method="POST" enctype="multipart/form-data" id="ProductSortForm" action="{% url 'shop' %}">
+                      {% csrf_token %}
+                      <select class="form-select form-select-sm rounded-pill py-2 ps-3" name="SelectSorting" aria-label=".form-select-sm example">
+                          {% for product_category in product_category %}
+                            <option value="{{ product_category.product_category_id }}" name="SelectSorting" {% if select == product_category.product_category_id %} selected="selected" {% endif %} > {{ product_category.category_name }}</option>
+                          {% endfor %}
+                      </select>
+                  </form>
           </div>
 
-      <div class="col-sm-10 p-4">
-         <h2 class="fw-bolder headers text-blue text-left">Products</h2>
-            <section>
-                  <div class="container py-2">
-                        <div class="row row-cols-1 bg-main row-cols-lg-4 row-cols-md-2 g-4">
-                            {% for product in products %}
-                                  <div class="col mb-4 bg-light shadow-sm py-3">
-                                        <div class="bg-image">
-                                                {% if product.productimage_set.first.image.url == "" %}
-                                                    <img class="ProductImages" src="/static/main/images/zamil_farm_default.jpg"  style="height:200px; object-fit: cover;" alt="...">
-                                                {% else %}
-                                                    <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
-                                                {% endif %}
-                                              <a href="{% url 'product-detail' product.id %}">
-                                                    <div class="mask" style="background-color: rgba(0, 0, 0, 0);">
-                                                          <div class="d-flex justify-content-start align-items-start h-100">
-                                                            <h4><span class="badge bg-light pt-2 ms-2 mt-3 f-color-primary">{{product.product_name}}</span></h4>
-                                                            <h4><span class="badge bg-light pt-2 ms-2 mt-3 text-dark">Kes: {{product.price}}</span></h4>
-                                                          </div>
-                                                    </div>
-                                              </a>
-                                        </div>
-                                        <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
-                                            <div class="d-grid gap-2">
-                                                <button class="btn btn-dark bg-tertiary" type="button">Add to cart</button>
-                                            </div>
-                                        </a>
+      <div class="col-sm-9 p-4">
+                <section>
+                      <div class="container py-2">
+                            <div class="tab-content" id="myTabContent">
+                                  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                      <div class="pb-4">
+                                            <span class="fw-bolder headers fs-5 text-secondary text-left pe-2">Products</span>
+                                            <span class="badge rounded-pill text-bg-primary bg-secondary text-dark">{{ category_display }}</span>
+                                      </div>
+                                       <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
+                                            {% for product in products %}
+                                                  <div class="col mb-4 py-3">
+                                                        <div class="bg-image">
+                                                                {% if product.productimage_set.first.image.url == "" %}
+                                                                    <img class="ProductImages" src="/static/main/images/zamil_farm_default.jpg"  style="height:200px; object-fit: cover;" alt="...">
+                                                                {% else %}
+                                                                    <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
+                                                                {% endif %}
+                                                              <p class="py-2 fst-italic fw-semibold text-lowercase f-color-secondary mb-0">{{product.product_category}}</p>
+                                                              <a class="text-decoration-none" href="{% url 'product-detail' product.id %}" class="pt-0">
+                                                                  <h5 class="f-color-primary fw-bold">{{product.product_name}}</h5>
+                                                                  <h6 class=" text-black-50 fw-semibold">Kes: {{product.price}}</h6>
+
+                                                              </a>
+                                                        </div>
+                                                        <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
+                                                            <div class="d-grid gap-2">
+                                                                <button class="btn btn-dark rounded-0 bg-tertiary" type="button">Add to cart</button>
+                                                            </div>
+                                                        </a>
+                                                  </div>
+                                            {% endfor %}
+                                       </div>
                                   </div>
-                            {% endfor %}
-                        </div>
-                  </div>
-            </section>
+                                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                       <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
+                                              <!-- start of price low to high -->
+                                              {% for product in products|dictsort:"price" %}
+                                                  <div class="col mb-4 py-3">
+                                                        <div class="bg-image">
+                                                                {% if product.productimage_set.first.image.url == "" %}
+                                                                    <img class="ProductImages" src="/static/main/images/zamil_farm_default.jpg"  style="height:200px; object-fit: cover;" alt="...">
+                                                                {% else %}
+                                                                    <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
+                                                                {% endif %}
+                                                              <p class="py-2 fst-italic fw-semibold text-lowercase f-color-secondary mb-0">{{product.product_category}}</p>
+                                                              <a class="text-decoration-none" href="{% url 'product-detail' product.id %}" class="pt-0">
+                                                                  <h5 class="f-color-primary fw-bold">{{product.product_name}}</h5>
+                                                                  <h6 class=" text-black-50 fw-semibold">Kes: {{product.price}}</h6>
+
+                                                              </a>
+                                                        </div>
+                                                        <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
+                                                            <div class="d-grid gap-2">
+                                                                <button class="btn btn-dark rounded-0 bg-tertiary" type="button">Add to cart</button>
+                                                            </div>
+                                                        </a>
+                                                  </div>
+                                              {% endfor %}
+                                              <!-- end of price low to high -->
+                                       </div>
+                                  </div>
+                                  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                                      <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 g-4">
+                                              <!-- start of price high to low -->
+                                              {% for product in products|dictsortreversed:"price" %}
+                                                  <div class="col mb-4 py-3">
+                                                        <div class="bg-image">
+                                                                {% if product.productimage_set.first.image.url == "" %}
+                                                                    <img class="ProductImages" src="/static/main/images/zamil_farm_default.jpg"  style="height:200px; object-fit: cover;" alt="...">
+                                                                {% else %}
+                                                                    <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
+                                                                {% endif %}
+                                                              <p class="py-2 fst-italic fw-semibold text-lowercase f-color-secondary mb-0">{{product.product_category}}</p>
+                                                              <a class="text-decoration-none" href="{% url 'product-detail' product.id %}" class="pt-0">
+                                                                  <h5 class="f-color-primary fw-bold">{{product.product_name}}</h5>
+                                                                  <h6 class=" text-black-50 fw-semibold">Kes: {{product.price}}</h6>
+
+                                                              </a>
+                                                        </div>
+                                                        <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
+                                                            <div class="d-grid gap-2">
+                                                                <button class="btn btn-dark rounded-0 bg-tertiary" type="button">Add to cart</button>
+                                                            </div>
+                                                        </a>
+                                                  </div>
+                                              {% endfor %}
+                                              <!-- end of price high to low -->
+                                      </div>
+                                  </div>
+                            </div>
+                      </div>
+                </section>
         </div>
       </div>
     </div>
 
+<script>
+    $(document).ready(function() {
+        $(".form-select").click(function () {
+            $("#ProductSortForm").submit()
+        });
+    });
+</script>
 
 <!-- FOOTER -->
   <footer class="container">
     <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
-    <p>&copy; 2022 MasomoPortal. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2022 Zamil Farms. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>
