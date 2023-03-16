@@ -3,8 +3,10 @@ from PIL import Image
 from django.utils import timezone
 import uuid
 
+
 class ProductCategory(models.Model):
-    product_category_id = models.CharField(primary_key=True, default=uuid.uuid4, blank=True, editable=False, max_length=100)
+    product_category_id = models.CharField(primary_key=True, default=uuid.uuid4, blank=True, editable=False,
+                                           max_length=100)
     category_name = models.CharField(max_length=255, null=False)
 
     def __str__(self):
@@ -13,14 +15,17 @@ class ProductCategory(models.Model):
     class Meta:
         verbose_name = "Product Categories"
 
+
 # Create your models here.
 class Product(models.Model):
     id = models.CharField(primary_key=True, default=uuid.uuid4, blank=True, editable=False, max_length=100)
-    product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, blank=True, null=True,)
-    product_name = models.CharField(max_length=255, null=False, unique=True)
+    product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, blank=True, null=True, )
+    product_name = models.CharField(max_length=255, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
     date_created = models.DateTimeField(default=timezone.now)
-    main_image = models.ImageField(upload_to='product_pics', blank=True, null=False, default='product_pics/zamil_farm_product.png')
+    main_image = models.ImageField(upload_to='product_pics', blank=True, null=False,
+                                   default='product_pics/zamil_farm_product.png')
+    product_description = models.CharField(null=False, blank=True, max_length=255)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -40,7 +45,6 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.product_name}'
-
 
 
 class ProductImage(models.Model):

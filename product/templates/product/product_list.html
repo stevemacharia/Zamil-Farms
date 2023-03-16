@@ -1,6 +1,7 @@
 {% include 'main/base.html' %}
 
 <div class="container py-3 text-start">
+    {% if products %}
     <div class="row">
           <div class="col-sm-3  border px-2">
                 <h5 class="fw-bold ps-2 pt-3 f-color-primary">Sort by Price</h5>
@@ -15,7 +16,8 @@
                     <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Price: High to Low</a>
                   </li>
               </ul>
-              <h5 class="fw-bold ps-2 pt-3 f-color-primary">Sort by Category</h5>
+              {% if product_category %}
+                  <h5 class="fw-bold ps-2 pt-3 f-color-primary">Sort by Category</h5>
                   <form method="POST" enctype="multipart/form-data" id="ProductSortForm" action="{% url 'shop' %}">
                       {% csrf_token %}
                       <select class="form-select form-select-sm rounded-pill py-2 ps-3" name="SelectSorting" aria-label=".form-select-sm example">
@@ -24,9 +26,9 @@
                           {% endfor %}
                       </select>
                   </form>
+              {% endif %}
           </div>
-
-      <div class="col-sm-9 p-4">
+          <div class="col-sm-9 p-4">
                 <section>
                       <div class="container py-2">
                             <div class="tab-content" id="myTabContent">
@@ -119,9 +121,14 @@
                             </div>
                       </div>
                 </section>
-        </div>
-      </div>
+          </div>
     </div>
+    {% else %}
+        <div class="alert alert-success text-center" role="alert">
+            <h3>Coming Soon</h3>
+        </div>
+    {% endif %}
+</div>
 
 <script>
     $(document).ready(function() {
@@ -134,5 +141,5 @@
 <!-- FOOTER -->
   <footer class="container">
     <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
-    <p>&copy; 2022 Zamil Farms. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2023 Zamil Farms. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>
