@@ -1,0 +1,16 @@
+{% load cart_tag %}
+{% load crispy_forms_tags %}
+{% include 'alexadashcams/navbar2.html' %}
+<div class="container py-5 mb-5">
+    <div class="alert alert-danger" role="alert">
+        <div class="text-center">
+            {{msg}}
+        </div>
+    </div>
+    <div class="cart_buttons d-flex justify-content-between">
+        <a href="{% url 'request-new-link-from-email'%}"><button type="button" class="btn btn-outline-dark">Resend Verification Email</button></a>
+        <a href="{% url 'login'%}"><button type="button" class="btn btn-success rounded-0 border-0" > Proceed to Login
+        <div class="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"> </div>
+        </button></a>
+    </div>
+</div>

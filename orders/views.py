@@ -21,8 +21,8 @@ from django.template.loader import get_template
 @login_required
 def checkout(request):
     cart = request.session['cart'].items()
-    student = User.objects.get(id=request.user.id)
-    if UserProfile.objects.filter(user=student):
+    user = User.objects.get(id=request.user.id)
+    if UserProfile.objects.filter(user=user):
         if cart:
             if request.method == 'POST':
                 u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -38,9 +38,9 @@ def checkout(request):
                 su_form = UserMobileUpdateForm(instance=request.user.userprofile)
                 u_form = UserUpdateForm(instance=request.user)
                 p_form = PaymentForm()
-            student = User.objects.get(id=request.user.id)
+            user = User.objects.get(id=request.user.id)
             context = {
-                'student': student,
+                'user': user,
                 'su_form': su_form,
                 'u_form': u_form,
                 'p_form': p_form,
@@ -49,7 +49,7 @@ def checkout(request):
         else:
             return redirect('checkout')
     else:
-        messages.warning(request, f'Kindly create a student account to enroll to a course.!')
+        messages.warning(request, f'Kindly create an account to continue with purchase!')
         return redirect('profile')
 
 

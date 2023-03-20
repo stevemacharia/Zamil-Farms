@@ -117,7 +117,7 @@ def payment_confirmation(request):
             OrderModel.save()
             #############################################
             ######################## mail system ####################################
-            htmly = get_template('users/email_invoice.html')
+            htmly = get_template('user/email_invoice.html')
             base_dir = settings.MEDIA_ROOT
             d = {
                 'username': user,

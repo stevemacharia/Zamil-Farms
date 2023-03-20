@@ -48,19 +48,16 @@
                                             {% else %}
                                                 <img src="{{ product.main_image.url}}"  class="img-fluid"  alt="...">
                                             {% endif %}
-                                          <p class="pt-2 fst-italic fw-semibold text-lowercase text-muted mb-0">{{product.product_category}}</p>
-                                          <a href="{% url 'product-detail' product.id %}" class="pt-0">
-                                                <div class="mask" style="">
-                                                      <div class="d-flex justify-content-start align-items-start h-100">
-                                                        <h4><span class="badge ps-0 f-color-primary">{{product.product_name}}</span></h4>
-                                                        <h4><span class="badge text-dark">Kes: {{product.price}}</span></h4>
-                                                      </div>
-                                                </div>
+                                          <p class="py-2 fst-italic fw-semibold text-lowercase f-color-secondary mb-0">{{product.product_category}}</p>
+                                          <a class="text-decoration-none" href="{% url 'product-detail' product.id %}" class="pt-0">
+                                              <h5 class="f-color-primary fw-bold">{{product.product_name}}</h5>
+                                              <h6 class=" text-black-50 fw-semibold">Kes: {{product.price}}</h6>
+
                                           </a>
                                     </div>
                                     <a class="text-decoration-none" href="{% url 'cart_add' product.id %}">
                                         <div class="d-grid gap-2">
-                                            <button class="btn btn-dark bg-tertiary" type="button">Add to cart</button>
+                                            <button class="btn btn-dark rounded-0 bg-tertiary" type="button">Add to cart</button>
                                         </div>
                                     </a>
                               </div>
@@ -148,5 +145,5 @@
   <!-- FOOTER -->
   <footer class="container pt-1 mt-4">
     <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
-    <p>&copy; 2022 Zamil Farms. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2023 Zamil Farms. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>

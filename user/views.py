@@ -58,6 +58,9 @@ def logout_request(request):
 def login_prompt(request):
     return render(request, 'user/login_prompt.html')
 
+def password_reset(request):
+    return render(request, 'password_reset/recovery_form.html')
+
 
 @login_required
 def profile(request):

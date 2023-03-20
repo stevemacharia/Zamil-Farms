@@ -1,0 +1,23 @@
+{% load cart_tag %}
+{% load crispy_forms_tags %}
+{% include 'alexadashcams/navbar2.html' %}
+<div class="container py-5 mb-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <h3 class="card-header">Send Verification Email</h3>
+              <div class="card-body">
+                <form method='POST' >
+                        {% csrf_token %}
+                        <fieldset>
+                            {{form |crispy }}
+                        </fieldset>
+                        <div>
+                            <button class="btn btn-outline-dark" type="submit">Request New Verification Email</button>
+                        </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

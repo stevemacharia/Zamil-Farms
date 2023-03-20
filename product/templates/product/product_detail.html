@@ -2,25 +2,34 @@
 
     <div class="container my-5">
 
-        <div class="card details-card p-0">
+        <div class="card details-card border-0 bg-transparent p-0">
             <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <img class="img-fluid details-img" src="{{product.main_image.url}}" alt="">
+                <div class="col-sm-7 py-3  px-3">
+                    <div id="ProductDetailPageImage">
+                        <img id="main-image" src="{{product.main_image.url}}" class="img-fluid" alt="...">
+                    </div>
+                    <span  class="py-4 owl-carousel owl-theme">
+                        {% for object in product.productimage_set.iterator%}
+                            <div class="item" >
+                                <img onclick="change_image(this)" id="SmallThumbnail" src="{{object.image.url}}"/>
+                            </div>
+                        {% endfor %}
+                    </span>
                 </div>
-                <div class="col-md-6 col-sm-12 description-container p-5">
+                <div class="col-sm-5 description-container">
                     <div class="main-description">
                         <h3>{{ product.product_name}}</h3>
                         <hr>
                         <p class="product-price fw-bold">Kes: {{ product.price }}</p>
                         <div class="d-grid gap-2">
-                            <a class="text-reset" href="{% url 'cart_add' product.id %}"><button name="add_to_cart" type="submit" class="btn btn-dark bg-tertiary">Add to cart</button></a>
+                            <a class="text-reset" href="{% url 'cart_add' product.id %}"><button name="add_to_cart" type="submit" class="btn btn-dark rounded-0 bg-tertiary">Add to cart</button></a>
                         </div>
-                        <p class="py-3">Have a question about our products at E-Store? Feel free to contact our representatives via live chat or email.</p>
+                        <p class="py-3">Have a question about our products? Feel free to contact our representatives via live chat or email.</p>
                     </div>
                 </div>
-                <div class="p-4">
+                <div class="px-3rem">
                     <hr>
-                    <div class="px-5">
+                    <div class="px-1">
                         <h4 class="product-title f-color-primary text-center mt-4 mb-1">About this product</h4>
                         <p class="product-description mb-4">{{product.product_description}}</p>
                     </div>
@@ -29,3 +38,34 @@
             </div><!-- End row -->
         </div>
     </div>
+<script>
+$(document).ready(function () {
+  $('#carouselExampleIndicators').find('.carousel-item').first().addClass('active');
+});
+
+$(document).ready(function(){
+  $(".owl-carousel").owlCarousel(
+      {
+    "loop":true,
+    "margin":10,
+    "nav":true,
+        "autoWidth":true,
+    "items":4,
+    "responsive":{
+        0:{
+            "items":1
+        },
+        600:{
+            "items":3
+        },
+        1000:{
+            "items":3
+        }
+    }
+}
+  );
+});
+
+
+
+</script>

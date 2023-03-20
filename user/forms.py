@@ -95,6 +95,8 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['profile_pic', 'phone_number', 'address_county', 'address_city_town']
 
 class UserMobileUpdateForm(forms.ModelForm):
+    address_county = forms.ChoiceField(choices=COUNTIES, label='County', required=False)
+    address_city_town = forms.CharField(label='City/Town', required=False)
     phone_number = PhoneNumberField(region="KE")
 
     class Meta:

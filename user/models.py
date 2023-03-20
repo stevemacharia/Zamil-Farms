@@ -8,9 +8,8 @@ from django.utils import timezone
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=100, blank=True)
-    address_county = models.CharField(max_length=100, blank=True)
-    address_city_town = models.CharField(max_length=100, blank=True)
+    address_county = models.CharField(null=False, max_length=100, blank=True)
+    address_city_town = models.CharField(null=False, max_length=100, blank=True)
     phone_number = PhoneNumberField(null=False, blank=True)
     profile_pic = models.ImageField(default='default_profile.png', upload_to='profile_pics')
 

@@ -73,7 +73,7 @@ ROOT_URLCONF = 'Zamil_Farms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'Bit/2015/29070',
+        'PASSWORD': 'toor',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -159,13 +159,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # email config
-DEFAULT_FROM_EMAIL = 'info@arieshelby.com'
+# DEFAULT_FROM_EMAIL = 'info@arieshelby.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'mail.arieshelby.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'info@arieshelby.com'
+# EMAIL_HOST_PASSWORD = '%%s_GO-f8VyE'
+
+DEFAULT_FROM_EMAIL = 'mail.zamilfarms.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.arieshelby.com'
+EMAIL_HOST = 'mail.zamilfarms.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'info@arieshelby.com'
-EMAIL_HOST_PASSWORD = 'g.x!wuIQ.5Pl'
+EMAIL_HOST_USER = 'info@zamilfarms.com'
+EMAIL_HOST_PASSWORD = 'SXqaF%O9SEwC'
+
+LOGIN_REDIRECT_URL = 'profile'
 
 LOGIN_REDIRECT_URL = 'profile'
 # end of email config

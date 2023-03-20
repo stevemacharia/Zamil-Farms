@@ -25,11 +25,11 @@
             {{ login_form|crispy }}
             <button class="btn btn-dark bg-tertiary mt-3" type="submit">Login</button>
           </form>
-          <p class="text-left pt-2">Don't have an account? <a href="{% url 'register' %}" class="f-color-primary">Create an account</a>.</p>
+          <p class="text-left pt-2">Don't have an account? <a href="{% url 'user_register' %}" class="f-color-primary">Create an account</a>.</p>
 
             <small class="text-muted">
                 {# Assumes you setup the password_reset view in your URLconf #}
-                <p class="pt-3"><a class="fw-bold text-dark" href="{% url "password_reset_recover" %}">Forgot your password?</a></p>
+                <p class="pt-3"><a class="fw-bold text-dark" href="{% url "password_reset_recover" %}">Forgot your password? Click to create a new password</a></p>
             </small>
         </div>
     </div>

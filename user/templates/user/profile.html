@@ -17,7 +17,7 @@
                         <i class="bi bi-clock-history"></i>
                         <span class="font-weight-bold small text-uppercase ps-1">Order History</span></a>
 
-                    <a class="nav-link mb-3 p-3 shadow f-color-primary"  href="{% url 'logout'%}" >
+                    <a class="nav-link mb-3 p-3 shadow f-color-primary"  href="{% url 'logouts'%}" >
                     <i class="bi bi-box-arrow-left"></i>
                     <span class="font-weight-bold small text-uppercase ps-1">Log out</span></a>
                 </div>
@@ -70,7 +70,7 @@
                                       </div>
                                     </div>
                                   <!-- End of Modal -->
-                                  <a href="#"><button type="button" class="btn btn-outline-danger m-1">Change Password</button></a>
+                                  <a href="{% url 'reset' %}"><button type="button" class="btn btn-outline-danger m-1">Change Password</button></a>
                               </div>
                             </div>
                           </div>
@@ -122,5 +122,5 @@
   <!-- FOOTER -->
   <footer class="container pt-1 mt-4">
     <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#" class="text-reset f-color-primary">Back to top</a></p>
-    <p>&copy; 2022 Zamil Farms. &middot; <a href="#" class="text-reset f-color-primary">Privacy</a> &middot; <a href="#" class="text-reset f-color-primary">Terms</a></p>
+    <p>&copy; 2023 Zamil Farms. &middot; <a href="#" class="text-reset f-color-primary">Privacy</a> &middot; <a href="#" class="text-reset f-color-primary">Terms</a></p>
   </footer>

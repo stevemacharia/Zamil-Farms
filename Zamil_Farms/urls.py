@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from product import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,15 +33,31 @@ urlpatterns = [
     path('verification/', include('verify_email.urls')),
 
     path('tinymce/', include('tinymce.urls')),
-
+    #start of cart
     path('cart/add/<str:id>/', views.cart_add, name='cart_add'),
     path('cart/item_clear/<str:id>/', views.item_clear, name='item_clear'),
     path('cart/item_increment/<str:id>/', views.item_increment, name='item_increment'),
     path('cart/item_decrement/<str:id>/', views.item_decrement, name='item_decrement'),
     path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
     path('cart/cart-detail/', views.cart_detail, name='cart_detail'),
-
+    # end of cart
     path('', include('admin_volt.urls')),
+
+    # start of user accounts
+    # path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='logout'),
+    # path('password-reset/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'),
+    #      name='password_reset'),
+    # path('password-reset/done/',
+    #      auth_views.PasswordResetDoneView.as_view(template_name='user/password_reset_done.html'),
+    #      name='password_reset_done'),
+    # path('password-reset-confirm/<uidb64>/<token>/',
+    #      auth_views.PasswordResetConfirmView.as_view(template_name='user/password_reset_confirm.html'),
+    #      name='password_reset_confirm'),
+    # path('password-reset-complete/',
+    #      auth_views.PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'),
+    #      name='password_reset_complete'),
+    # end of user accounts
 ]
 
 if settings.DEBUG:

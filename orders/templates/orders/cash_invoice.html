@@ -116,7 +116,7 @@
           left:-5px;
           top:11px;
           width:120px;
-          background-color:#66c591;
+          background-color:red;
           font-size:15px;
           color:#fff;
         }
@@ -171,7 +171,7 @@
                 <div class="panel-body">
                     <div class="d-flex justify-content-end">
                         <div class="invoice-ribbon">
-                            <div class="ribbon-inner">PAID</div>
+                            <div class="ribbon-inner">UNPAID</div>
                         </div>
                     </div>
                     <div class="row pt-0 pb-0" id="InvoiceHeader">
@@ -190,7 +190,7 @@
                     <div class="row pt-0" id="InvoiceDetails" >
                         <div class="col-sm-4 from">
                             <p class="fw-semibold">From :</p>
-                            <h4 class="fw-bolder text-uppercase">ZAMIL FARM</h4>
+                            <h4 class="fw-bolder text-uppercase">ZAMIL FARMS</h4>
                             <p class="text-dark">Phone: (+254) 7XX XXXX XXX</p>
                         </div>
                         <div class="col-sm-4 to">
@@ -214,7 +214,7 @@
                         <thead>
                             <tr class="text-start">
                                 <th class="text-center">#</th>
-                                <th class="text-center">Course</th>
+                                <th class="text-center">Product</th>
                                 <th class="text-center">Unit Price</th>
                                 <th class="text-center">Total Price</th>
                             </tr>
@@ -235,7 +235,7 @@
 
                     <div class="row">
                     <div class="col-sm-6 margintop">
-                        <p class="lead marginbottom fw-semibold fs-6">Thank You!</p>
+                        <p class="lead marginbottom fw-bold fs-6">Thank You!</p>
                     </div>
                     <div class="col-sm-6 text-end pull-right invoice-total">
                             {% for customerorder in customerorder %}
