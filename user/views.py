@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from user.models import UserProfile
 from orders.models import Order, OrderDetail
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, UserMobileUpdateForm
 from django.http import HttpResponseRedirect
 
 def register_request(request):
@@ -69,7 +69,7 @@ def profile(request):
     userinfo = user
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        p_form = UserMobileUpdateForm(request.POST, instance=request.user.userprofile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -81,7 +81,7 @@ def profile(request):
     else:
         orders = Order.objects.filter(customer_id=userinfo)
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(request.FILES, instance=request.user.userprofile)
+        p_form = UserMobileUpdateForm(instance=request.user.userprofile)
         context = {
             'user': request.user,
             'u_form': u_form,

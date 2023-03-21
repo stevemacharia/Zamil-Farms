@@ -27,7 +27,7 @@ class PaymentView(TemplateView, PaymentRequestMixin):
         global userinfo
         userinfo = User.objects.get(username=current_user)
         total_bill = 0.0
-        payment_options = "UNDEFINED"
+        payment_options = "NOT COMPLETED"
         for key, value in self.request.session['cart'].items():
             total_bill = total_bill + (float(value['price']) * value['quantity'])
         cart_total_amount_b = ("{:.2f}".format(total_bill))
@@ -69,9 +69,9 @@ class PaymentView(TemplateView, PaymentRequestMixin):
         order_info = {
             "id": shortcode,
             "amount": cart_total_amount_b,
-            "description": "Payment for X",
+            "description": "Payment for Zamil Farms Products",
             "reference": shortcode,
-            "phone_number": "0711253491",
+            "phone_number": userinfo.userprofile.phone_number,
             "email_address": userinfo.email,
         }
 
@@ -94,10 +94,11 @@ def payment_confirmation(request):
         template_name = get_template('orders/paid_invoice.html')
         OrderModel = Order.objects.get(order_name_id=shortcode)
         user = request.user
-        ###########Update payment method on orders model########
+        ###########Update payment method and status on orders model########
         current_transaction = Transaction.objects.get(merchant_reference=order_id,
                                                       payment_status=payment_status_completed)
         pesapal_payment_method = current_transaction.payment_method
+        OrderModel.status = "PAID"
         OrderModel.payment_method = pesapal_payment_method
         OrderModel.save()
         ##########################

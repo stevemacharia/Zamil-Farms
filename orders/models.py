@@ -10,7 +10,7 @@ class Order(models.Model):
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=100)
     order_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    invoice_doc = models.FileField(upload_to='invoices',)
+    invoice_doc = models.FileField(upload_to='invoices', blank=True, null=False)
     date_ordered = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=100, default="UNPAID")
 

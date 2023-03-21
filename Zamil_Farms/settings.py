@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zamil_farm',
         'USER': 'root',
-        'PASSWORD': 'toor',
+        'PASSWORD': 'Bit/2015/29070',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -167,7 +167,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_HOST_USER = 'info@arieshelby.com'
 # EMAIL_HOST_PASSWORD = '%%s_GO-f8VyE'
 
-DEFAULT_FROM_EMAIL = 'mail.zamilfarms.com'
+DEFAULT_FROM_EMAIL = 'info@zamilfarms.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.zamilfarms.com'
 EMAIL_USE_TLS = True
@@ -195,7 +195,7 @@ NEW_EMAIL_SENT_TEMPLATE = 'user/new_email_sent.html'
 
 EXPIRE_AFTER = "30m"
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'user_login'
 
 MAX_RETRIES = 10
 # NEW_EMAIL_SENT_TEMPLATE  = 'path/to/new_email_sent.html'
@@ -223,8 +223,8 @@ PESAPAL_QUERY_STATUS_LINK = 'https://www.pesapal.com/API/QueryPaymentDetails'
 
 PESAPAL_ITEM_DESCRIPTION = False
 PESAPAL_TRANSACTION_MODEL = "django_pesapal.Transaction"
-PESAPAL_CONSUMER_KEY = "b+BM/9n9fVanuT5gYne9DUCWkhwlQBE4"
-PESAPAL_CONSUMER_SECRET = "xwFVOFbec+0cHR9OmSom5CkHexQ="
+PESAPAL_CONSUMER_KEY = "fr4XbPJ6xttNMyYGcBgT4/HiVTw8P/8H"
+PESAPAL_CONSUMER_SECRET = "d7U7lGqnSRO+dBG6I28MGmbrgeI="
 # PESAPAL_CONSUMER_KEY = "fr4XbPJ6xttNMyYGcBgT4/HiVTw8P/8H"
 # PESAPAL_CONSUMER_SECRET = "d7U7lGqnSRO+dBG6I28MGmbrgeI="
 PESAPAL_REDIRECT_WITH_REFERENCE	= True

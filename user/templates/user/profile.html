@@ -46,7 +46,7 @@
                                           <div class="modal-header">
                                             <span class="modal-title" id="exampleModalLabel">
                                                 <h5 class="f-color-primary fw-bold">Update Your Details</h5>
-                                                <p class="card-text"><small class="text-muted">*Kindly fill the phone number with no spaces i.e 0712345678</small></p>
+                                                <p class="card-text"><small class="text-muted">*Kindly fill the phone number with no spaces i.e +254712345678</small></p>
                                             </span>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                           </div>
@@ -92,13 +92,14 @@
                                   </thead>
                                   <tbody class="table-group-divider">
                                   {% for order in orders%}
-                                    <tr>
-
-                                      <td>{{ forloop.counter }}</td>
-                                      <td>#{{order.order_name_id}}</td>
-                                      <td>{{order.date_ordered}}</td>
-                                      <td><a href="{{order.invoice_doc.url }}"><button type="button" class="btn btn-outline-dark">View</button></a></td>
-                                    </tr>
+                                      {% if order.invoice_doc %}
+                                            <tr>
+                                              <td>{{ forloop.counter }}</td>
+                                              <td>#{{order.order_name_id}}</td>
+                                              <td>{{order.date_ordered}}</td>
+                                              <td><a href="{{order.invoice_doc.url }}"><button type="button" class="btn btn-outline-dark">View</button></a></td>
+                                            </tr>
+                                      {% endif %}
                                   {% endfor %}
                                   </tbody>
                                 </table>
