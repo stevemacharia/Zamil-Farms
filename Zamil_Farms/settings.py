@@ -207,7 +207,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 CART_SESSION_ID = 'cart'
 
-
 # start of pesapal settings
 PESAPAL_DEMO = True
 PESAPAL_OAUTH_CALLBACK_URL = "transaction_completed"
@@ -223,15 +222,13 @@ PESAPAL_QUERY_STATUS_LINK = 'https://www.pesapal.com/API/QueryPaymentDetails'
 
 PESAPAL_ITEM_DESCRIPTION = False
 PESAPAL_TRANSACTION_MODEL = "django_pesapal.Transaction"
-PESAPAL_CONSUMER_KEY = "fr4XbPJ6xttNMyYGcBgT4/HiVTw8P/8H"
-PESAPAL_CONSUMER_SECRET = "d7U7lGqnSRO+dBG6I28MGmbrgeI="
+PESAPAL_CONSUMER_KEY = "ECff4mE8MGJDPZXxTwsCAlDBgmUFYIIT"
+PESAPAL_CONSUMER_SECRET = "Q2rWp2e4D6MaoeY+F/cB0IORoLE="
 # PESAPAL_CONSUMER_KEY = "fr4XbPJ6xttNMyYGcBgT4/HiVTw8P/8H"
 # PESAPAL_CONSUMER_SECRET = "d7U7lGqnSRO+dBG6I28MGmbrgeI="
 PESAPAL_REDIRECT_WITH_REFERENCE	= True
 # Override pesapal keysis needs to be a reversible
 # end of pesapal settings
-
-
 
 
 

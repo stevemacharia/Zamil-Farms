@@ -21,6 +21,7 @@ class Product(models.Model):
     id = models.CharField(primary_key=True, default=uuid.uuid4, blank=True, editable=False, max_length=100)
     product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, blank=True, null=True, )
     product_name = models.CharField(max_length=255, null=False)
+    unit = models.CharField(null=True, blank=True, max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, default=0)
     date_created = models.DateTimeField(default=timezone.now)
     main_image = models.ImageField(upload_to='product_pics', blank=True, null=False,

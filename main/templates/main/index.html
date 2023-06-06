@@ -50,7 +50,7 @@
                                             {% endif %}
                                           <p class="py-2 fst-italic fw-semibold text-lowercase f-color-secondary mb-0">{{product.product_category}}</p>
                                           <a class="text-decoration-none" href="{% url 'product-detail' product.id %}" class="pt-0">
-                                              <h5 class="f-color-primary fw-bold">{{product.product_name}}</h5>
+                                              <h5 class="f-color-primary fw-bold">{{product.product_name}} - {{product.unit}}</h5>
                                               <h6 class=" text-black-50 fw-semibold">Kes: {{product.price}}</h6>
 
                                           </a>
@@ -144,6 +144,11 @@
 
   <!-- FOOTER -->
   <footer class="container pt-1 mt-4">
-    <p class="float-end"><i class="bi bi-linkedin pe-2"></i> <i class="bi bi-facebook pe-2"></i> <i class="bi bi-twitter pe-2"></i> <i class="bi bi-instagram pe-4"></i> <a href="#">Back to top</a></p>
+      <p class="float-end">
+          <a class="text-dark" href="https://www.facebook.com/ZamilFarmKe"><i class="bi bi-facebook pe-2"></i></a>
+          <a class="text-dark" href="https://twitter.com/ZamilFarms?t=zldy7I3Z0r4-MScBCfN48Q&s=09"><i class="bi bi-twitter pe-2"></i></a>
+          <a class="text-dark" href="https://instagram.com/zamilfarms?igshid=ZDc4ODBmNjlmNQ=="><i class="bi bi-instagram pe-2"></i></a>
+          <a class="text-dark" href="https://youtube.com/@ZamilFarmsLTD?feature=share7"><i class="bi bi-youtube pe-4"></i></a>
+          <a href="#">Back to top</a></p>
     <p>&copy; 2023 Zamil Farms. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>

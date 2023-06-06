@@ -35,7 +35,7 @@
      <nav class="navbar py-4 sticky-top navbar-expand-lg navbar-light bg-white shadow-sm navbar-mod bg-main">
         <div class="container mt-1">
            <a class="navbar-brand fw-bold fs-5 px-2 py-1" href="{% url 'index' %}"  data-bs-toggle="tooltip"
-              data-bs-placement="bottom" title="Access admin panel"> ZAMIL FARM
+              data-bs-placement="bottom" title="Access admin panel">
                </a>
            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
               aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
                   <li class="nav-item">
                     <a class="nav-link active fw-bold" href="{% url 'cart_detail' %}" data-bs-toggle="tooltip"
                        data-bs-placement="bottom" title="Cart">
-                        <h4 class="mb-0"><i class="bi bi-bag-check-fill position-relative">
+                        <h4 class="mb-0"><i class="bi bi-cart-fill position-relative">
                             <span class="position-absolute top-0 start-100 translate-middle fs-6 f-color-primary badge rounded-pill">
                                 {{request.session.cart|length}}
                             </span>
